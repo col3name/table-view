@@ -41,7 +41,7 @@ export const animateFade = () => {
     return css`${anim} 1s linear forwards 1`
 };
 
-export const TableBody = styled.ul`
+export const TableBodyContainer = styled.ul`
     position: relative;
 `;
 

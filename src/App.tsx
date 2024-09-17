@@ -1,10 +1,11 @@
 import './App.css'
-import {HomePage} from "./app/page";
+
+import {MetersResult} from "./app/widgets/metersResult";
 
 function App() {
 
   return (
-    <HomePage/>
+    <MetersResult/>
   )
 }
 
