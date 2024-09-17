@@ -54,7 +54,7 @@ export const deleteMeter = async (meterId: string): Promise<boolean> => {
         );
         return (response.status === 204);
     } catch (error) {
-        console.log({error});
+        console.error({error});
         return false;
     }
 }
