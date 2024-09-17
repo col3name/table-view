@@ -30,9 +30,6 @@ export const Store = types
         get countPage() {
             return Math.ceil(self.count / self.limit);
         },
-        get placeStart() {
-            return (self.page - 1) * self.limit;
-        },
         get meterList() {
             const values = Array.from(self.addresses.values());
             const addressMap: Map<string, AddressModel> = toMap(values);

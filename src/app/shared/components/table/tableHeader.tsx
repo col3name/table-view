@@ -1,6 +1,6 @@
 import React, {memo} from "react";
 
-import {HeaderCell, HeaderRow} from "../../../shared/components/table/ui";
+import {HeaderCell, HeaderRow} from "./ui";
 
 import {HeaderItem} from "./table.types";
 

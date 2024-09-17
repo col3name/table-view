@@ -6,7 +6,7 @@ import {
     TableContainer
 } from "../../../shared/components/table/ui";
 import {MeterTableNavigation} from "./meterTableNavigation";
-import {MeterRow} from "./MeterRow";
+import {MeterRow} from "./meterRow";
 import {TableBody} from "../../../shared/components/table/tableBody";
 import {TableHeader} from "../../../shared/components/table/tableHeader";
 import {HeaderItem} from "../../../shared/components/table/table.types";

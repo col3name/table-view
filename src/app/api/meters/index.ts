@@ -1,6 +1,8 @@
 import axios from "axios";
+import {BASE_URL} from "../constant.ts";
 
 type GetAddressOption = { limit: number, offset: number };
+
 
 export const getAddresses = async ({
                                        limit = 1,
@@ -8,7 +10,7 @@ export const getAddresses = async ({
                                    }: GetAddressOption) => {
     try {
         const response = await axios.get(
-            `http://showroom.eis24.me/api/v4/test/meters/`,
+            `${BASE_URL}/api/v4/test/meters/`,
             {
                 withCredentials: true,
                 params: {limit: limit, offset},
@@ -29,7 +31,7 @@ export const getAddresses = async ({
 export const getArea = async (areaId: string) => {
      try {
          const response = await axios.get(
-             'http://showroom.eis24.me/api/v4/test/areas/',
+             BASE_URL + '/api/v4/test/areas/',
              {
                  params: {
                      id__in: areaId
@@ -50,7 +52,7 @@ export const getArea = async (areaId: string) => {
 export const deleteMeter = async (meterId: string): Promise<boolean> => {
     try {
         const response = await axios.delete(
-            `http://showroom.eis24.me/api/v4/test/meters/${meterId}/`
+            BASE_URL + `/api/v4/test/meters/${meterId}/`
         );
         return (response.status === 204);
     } catch (error) {

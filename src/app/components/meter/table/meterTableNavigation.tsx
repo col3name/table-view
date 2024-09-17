@@ -12,11 +12,11 @@ export const MeterTableNavigation = observer(() => {
     const current = store.meterStore.currentPage;
     const isFetchingNextPage = store.meterStore.isFetchingNextPage;
 
-    const setPage = useCallback((page: number) => {
+    const setPage = useCallback(async (page: number) => {
         if (isFetchingNextPage) {
             return;
         }
-        store.meterStore.setPage(page);
+        await store.meterStore.setPage(page);
     }, [store.meterStore, isFetchingNextPage]);
 
     return (
