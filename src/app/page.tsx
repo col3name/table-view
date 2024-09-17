@@ -158,8 +158,8 @@ type MeterIcon = {
 };
 
 const MeterIcon: React.FC<MeterIcon> = ({
-                                                   type
-                                               }) => {
+                                            type
+                                        }) => {
     return (
         <MeterIconContainer>
             {type === 'ColdWaterAreaMeter' && <><XBCIcon/><span>ХВС</span></>}
@@ -193,9 +193,10 @@ type MeterProps = {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     meter;
+    place: number;
     headerSizes: number[];
 };
-const MeterRow = observer(({headerSizes, meter}: MeterProps) => {
+const MeterRow = observer(({headerSizes, place, meter}: MeterProps) => {
     const area = meter.area;
     const [isFadingOut, setIsFadingOut] = useState(false);
 
@@ -218,7 +219,7 @@ const MeterRow = observer(({headerSizes, meter}: MeterProps) => {
 
     return (
         <Row $fade={isFadingOut}>
-            <Cell $percent={headerSizes[0]}>{meter.place}</Cell>
+            <Cell $percent={headerSizes[0]}>{place}</Cell>
             <Cell $percent={headerSizes[1]}>{types}</Cell>
             <Cell $percent={headerSizes[2]}>{installationDate}</Cell>
             <Cell $percent={headerSizes[3]}>{meter.is_automatic ? 'да' : 'нет'}</Cell>
@@ -357,6 +358,7 @@ export const HomePage = observer(() => {
     const meters = store.meterStore.meterList;
     const loading = store.meterStore.meterLoading;
     const isFetchingNextPage = store.meterStore.isFetchingNextPage;
+    const placeStart = store.meterStore.placeStart
 
     return (
         <Container>
@@ -370,9 +372,11 @@ export const HomePage = observer(() => {
                         {loading ? (
                             <span>Loading...</span>
                         ) : (
-                            meters.map(meter => {
+                            meters.map((meter, index: number) => {
                                 return (
-                                    <MeterRow key={meter.id} headerSizes={headerSizes} meter={meter}/>
+                                    <MeterRow key={meter.id}
+                                              place={placeStart + index + 1}
+                                              headerSizes={headerSizes} meter={meter}/>
                                 );
                             })
                         )}

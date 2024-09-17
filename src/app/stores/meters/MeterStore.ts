@@ -17,7 +17,6 @@ export const Address = types.model({
 const Meter = types.model({
     area: Address,
     brand_name: types.maybeNull(types.string),
-    place: types.optional(types.number, 0),
     communication: types.string,
     description: types.string,
     id: types.string,
@@ -95,7 +94,9 @@ export const MeterStore = types
         get countPage() {
             return Math.ceil(self.count / self.limit);
         },
-
+        get placeStart() {
+            return (self.page - 1) * self.limit;
+        },
         get meterList() {
             const values = Array.from(self.addresses.values());
             const addressMap: Map<string, AddressModel> = toMap(values);
@@ -106,7 +107,6 @@ export const MeterStore = types
                 return (
                     {
                         ...it,
-                        place: it.place,
                         area: addressMap.has(areaId) ? addressMap.get(areaId) : undefined,
                     }
                 );
@@ -151,7 +151,7 @@ export const MeterStore = types
                 const data = yield getAddresses({limit: self.limit, offset: newOffset});
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                const results = data.results.map((it, index: number) => ({...it, place: newOffset + index + 1}));
+                const results = data.results
                 if (self.count !== data.count) {
                     self.count = data.count;
                 }
@@ -223,6 +223,7 @@ export const MeterStore = types
 
                 const newAddresses = data.results;
                 const newAddress = newAddresses.at(0);
+
                 if (!newAddress) {
                     return false;
                 }
