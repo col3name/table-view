@@ -94,6 +94,8 @@ const HeaderRow = styled(Row)`
     font-weight: bold;
     background-color: #F0F3F7;
     position: sticky;
+    padding: 10px;
+    height: 32px;
     top: 0;
     left: 0;
     right: 0;
