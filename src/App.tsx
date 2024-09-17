@@ -1,11 +1,14 @@
 import './App.css'
 
+import {Container} from "./app/shared/components/container";
 import {MetersResult} from "./app/widgets/metersResult";
 
-function App() {
+const App = () => {
 
   return (
-    <MetersResult/>
+    <Container>
+      <MetersResult/>
+    </Container>
   )
 }
 
