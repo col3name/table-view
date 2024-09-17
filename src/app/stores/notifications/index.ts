@@ -67,11 +67,11 @@ export const NotificationStore = types
             self.notifications.push(fullNotification);
 
             if (fullNotification.timeout > 0) {
-               let id =  setTimeout(() => {
+              const timeoutId =   setTimeout(() => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     self.remove(fullNotification.id);
-                    clearTimeout(id);
+                    clearTimeout(timeoutId);
                 }, fullNotification.timeout);
             }
         },

@@ -3,12 +3,18 @@ import {flow, types} from 'mobx-state-tree';
 import {Address, AddressModel, ConfirmPopup, Meter, MeterModel} from "./model";
 import {deleteMeter, getAddresses, getArea} from "../../api/meters";
 import {toMap} from "./util";
+import axios, {CancelTokenSource} from "axios";
 
 const getPlaceStart = (page: number, limit: number, index: number) => {
-    return (page - 1) * limit + index  + 1;
+    return (page - 1) * limit + index + 1;
 }
 
+
 const LIMIT = 20;
+type CancelToken = {
+    cancelSource: CancelTokenSource,
+    cancelTokens: Map<string, CancelTokenSource>
+};
 export const MeterStore = types
     .model({
         meters: types.array(Meter),
@@ -23,6 +29,10 @@ export const MeterStore = types
         deleteLoading: false,
         deleteMeterId: '',
     })
+    .volatile((): CancelToken => ({
+        cancelSource: axios.CancelToken.source(),
+        cancelTokens: new Map<string, any>(),
+    }))
     .views((self) => ({
         get currentPage() {
             return self.page;
@@ -79,8 +89,13 @@ export const MeterStore = types
             }
 
             try {
+                self.cancelSource.cancel();
+                self.cancelSource = axios.CancelToken.source();
                 const newOffset = (self.page - 1) * self.limit;
-                const data = yield getAddresses({limit: self.limit, offset: newOffset});
+                const data = yield getAddresses({
+                    limit: self.limit, offset: newOffset,
+                    cancelToken: self.cancelSource.token,
+                });
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 const results = data.results
@@ -94,7 +109,11 @@ export const MeterStore = types
                 self.meters.clear();
                 self.meters.push(...results);
             } catch (error) {
-                console.error('Failed to fetch meters', error);
+                if (axios.isCancel(error)) {
+                    console.log(`Request getMeters limit:${self.limit}, offset: ${self.offset} canceled:`, error.message);
+                } else if (error instanceof Error) {
+                    console.error('Failed to fetch meters', error);
+                }
             } finally {
                 if (isNext) {
                     self.isFetchingNextPage = false;
@@ -123,7 +142,23 @@ export const MeterStore = types
             });
         }),
         fetchAddr: flow(function* (areaId: string) {
-            return yield getArea(areaId);
+            const cancelTokenId = 'getArea:' + areaId;
+            try {
+                if (self.cancelTokens.has(cancelTokenId)) {
+                    self.cancelTokens.get(cancelTokenId)?.cancel();
+                }
+                const cancelSource = axios.CancelToken.source();
+                self.cancelTokens.set(cancelTokenId, cancelSource);
+
+                return yield getArea(areaId);
+            } catch (error) {
+                if (axios.isCancel(error)) {
+                    console.log(`Fetch area ${areaId} canceled:`, error.message);
+                    if (self.cancelTokens.has(cancelTokenId)) {
+                        self.cancelTokens.get(cancelTokenId)?.cancel();
+                    }
+                }
+            }
         }),
         deleteMeter: flow(function* (meterId: string) {
             if (self.deleteLoading) {
@@ -131,8 +166,10 @@ export const MeterStore = types
             }
             self.deleteLoading = true;
             try {
+                self.cancelSource.cancel();
+                self.cancelSource = axios.CancelToken.source();
                 self.deleteMeterId = meterId;
-                const ok = yield deleteMeter(meterId);
+                const ok = yield deleteMeter(meterId, self.cancelSource.token);
                 if (!ok) {
                     return false;
                 }
@@ -141,7 +178,9 @@ export const MeterStore = types
                 if (!meterIndex) {
                     return false;
                 }
-                const data = yield getAddresses({limit: 1, offset: self.offset - 1});
+                self.cancelSource.cancel();
+                self.cancelSource = axios.CancelToken.source();
+                const data = yield getAddresses({limit: 1, offset: self.offset - 1, cancelToken: self.cancelSource.token});
 
                 const newAddresses = data.results;
                 const newAddress = newAddresses.at(0);
@@ -159,7 +198,11 @@ export const MeterStore = types
                 self.meters.push(newAddress);
                 return true;
             } catch (error) {
-                console.error('Failed to delete meter', error);
+                if (axios.isCancel(error)) {
+                    console.log(`Request delete meter ${meterId} canceled:`, error.message);
+                } else if (error instanceof Error) {
+                    console.error('Failed to delete meter', error);
+                }
                 return false;
             } finally {
                 self.deleteMeterId = '';

@@ -50,7 +50,7 @@ const useFadeAnimation = () => {
         setIsFadingOut(false);
     }, []);
 
-    const onFadeOut = useCallback(() => setTimeout(fadeOut, 300), [fadeOut]);
+    const onFadeOut = useCallback(() => setTimeout(fadeOut, 400), [fadeOut]);
 
     return {
         isFadingOut,

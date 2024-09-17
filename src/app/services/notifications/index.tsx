@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import {useStore} from "../../stores";
 
 import { NotificationsProvider as VicugnaNotificationsProvider} from "../../shared/ui/notifications";
+import {Notification} from "../../shared/typings/notifications.ts";
 
 interface NotificationsProviderProps {
     children: React.ReactNode;
@@ -12,10 +13,11 @@ interface NotificationsProviderProps {
 export const NotificationsProvider = observer<NotificationsProviderProps>(
     function NotificationsProvider({ children }) {
         const notificationsStore = useStore().notificationStore;
+        const notifications: Notification[] = notificationsStore.notificationsList;
 
         return (
             <VicugnaNotificationsProvider
-                notifications={[...notificationsStore.notificationsList]}
+                notifications={[...notifications]}
                 onClose={notificationsStore.remove}
             >
                 {children}

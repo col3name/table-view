@@ -50,7 +50,7 @@ export const Notifications: React.FC<NotificationsProps> =
                     return null;
                 }
 
-                return null;
+                return child;
             }) }
         </ul>
     );

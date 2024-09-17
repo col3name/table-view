@@ -14,7 +14,9 @@ export const Portal: React.FC<PortalPropsType> = ({id = "root-modal", className 
 
     useEffect(() => {
         let target = document.getElementById(id) as HTMLDivElement | null;
+        let created = false;
         if (!target) {
+            created = true;
             target = document.createElement('div')
             target.id = `portal-${id || randomID()}`;
             target.className = className;
@@ -24,7 +26,7 @@ export const Portal: React.FC<PortalPropsType> = ({id = "root-modal", className 
         }
         setElement(target);
         return () => {
-            if (target) {
+            if (target && created) {
                 document.body.removeChild(target);
             }
         };

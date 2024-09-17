@@ -1,18 +1,24 @@
-import axios from "axios";
+import axios, {CancelToken} from "axios";
 
 import {BASE_URL} from "../constant";
 
-type GetAddressOption = { limit: number, offset: number };
+type GetAddressOption = {
+    limit: number;
+    offset: number;
+    cancelToken: CancelToken;
+};
 
 export const getAddresses = async ({
                                        limit = 1,
                                        offset,
+                                       cancelToken,
                                    }: GetAddressOption) => {
     try {
         const response = await axios.get(
             `${BASE_URL}/api/v4/test/meters/`,
             {
                 params: {limit: limit, offset},
+                cancelToken,
             }
         );
         if (response.status > 400) {
@@ -48,10 +54,13 @@ export const getArea = async (areaId: string) => {
      }
 }
 
-export const deleteMeter = async (meterId: string): Promise<boolean> => {
+export const deleteMeter = async (meterId: string, cancelToken: CancelToken): Promise<boolean> => {
     try {
         const response = await axios.delete(
-            BASE_URL + `/api/v4/test/meters/${meterId}/`
+            BASE_URL + `/api/v4/test/meters/${meterId}/`,
+            {
+                cancelToken
+            },
         );
         return (response.status === 204);
     } catch (error) {

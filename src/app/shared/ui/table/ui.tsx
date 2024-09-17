@@ -31,10 +31,11 @@ export const animateFade = () => {
     const anim = keyframes`
         0% {
             opacity: 1;
-            height: initial;
+            visibility: visible;
         }
         100% {
             opacity: 0;
+            visibility: collapse;
             height: 0;
         }
     `
@@ -98,7 +99,7 @@ export const Row = styled.li<{ $disabled?: boolean, $fade?: boolean, }>`
     height: 52px;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
-    transition: background-color 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     animation: ${props => props.$fade ? animateFade() : 'none'};
 
     &:hover {
