@@ -45,7 +45,6 @@ const TableContainer = styled.div`
     overflow: auto;
 `;
 
-
 const Cell = styled.span<{ $disabled?: boolean, $percent?: number; $last?: boolean; }>`
     width: ${props => `${props.$percent}%`};
     color: ${props => !props.$disabled ? '#1F2939' : '#5E6674'};

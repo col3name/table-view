@@ -28,7 +28,6 @@ const Meter = types.model({
     _type: types.array(types.string),
 });
 
-
 const ConfirmPopup = types.model({
     opened: types.boolean,
     data: types.maybeNull(types.string),
@@ -36,6 +35,7 @@ const ConfirmPopup = types.model({
 
 export type AddressModel = Instance<typeof Address>
 export type MeterModel = Instance<typeof Meter>
+
 const toMap = (values: Array<AddressModel>) => {
     return values.reduce((acc: Map<string, AddressModel>, it) => {
         if (!acc.has(it.id)) {
@@ -70,14 +70,12 @@ const getAddresses = async ({
     }
 };
 
-
 const LIMIT = 20;
 export const MeterStore = types
     .model({
         meters: types.array(Meter),
         addresses: types.map(Address),
         confirmDeletePopup: types.optional(ConfirmPopup, {opened: false, data: null}),
-        // navigation: types.reference(Navigation),
         count: types.optional(types.number, 0),
         page: 1,
         limit: types.optional(types.number, LIMIT),
@@ -146,8 +144,6 @@ export const MeterStore = types
 
             try {
                 const newOffset = (self.page - 1) * self.limit;
-                // const data2 = yield getAddresses({limit: self.limit + LIMIT, offset: newOffset});
-                // console.log(data2.results.map(it => it.description))
                 const data = yield getAddresses({limit: self.limit, offset: newOffset});
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
@@ -186,7 +182,6 @@ export const MeterStore = types
             const list = addressResponse.map(it => it.value);
             list.forEach((addr: AddressModel) => {
                 if (!self.addresses.has(addr.id)) {
-                    // addr.house.address = addr.house.address.substring('г Санкт-Петербург,'.length)
                     self.addresses.set(addr.id, addr);
                 }
             });
