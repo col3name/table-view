@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from "react";
-import {observer} from "mobx-react";
+import {observer} from "mobx-react-lite";
 import styled from "styled-components";
 
 import {Cell, Row} from "../../../shared/ui/table/ui";

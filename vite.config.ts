@@ -1,7 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
+import terser from '@rollup/plugin-terser';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  build: {
+    minify: 'esbuild',
+    rollupOptions: {
+      treeshake: true,
+      plugins: [visualizer(), terser()],
+    },
+  },
+});

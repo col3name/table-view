@@ -1,6 +1,6 @@
 
 import {useLayoutEffect} from 'react';
-import {observer} from 'mobx-react';
+import {observer} from 'mobx-react-lite';
 
 import {H2} from "../../shared/ui/typography";
 import {MeterTable} from "../../components/meter/table";
