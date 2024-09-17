@@ -14,10 +14,10 @@ import {PopupRemoveMeter} from "@/compents/Meter/removePopup";
 import {formatDate} from "@/shared/lib/date";
 import {useStore} from "@/stores";
 
-const Container = styled.div<{$hidden?: boolean}>`
+const Container = styled.div<{ $hidden?: boolean }>`
     display: ${props => props.$hidden ? 'none' : 'flex'};
     flex-direction: column;
-    
+
     gap: 4px;
     margin: 0 auto;
     max-width: 1400px;
@@ -249,10 +249,10 @@ const MeterRow = observer(({headerSizes, meter}: { meter: any, headerSizes: numb
 
 const getPages = (count: number, current: number): number[] => {
     if (count > 10) {
-        // if (current < 4 || current >= count - 2) {
-        //     return [1, 2, 3, NaN, count - 2, count - 1, count,]
-        // }
-        return [1, 2, NaN, current - 1, current, current + 1, NaN, count - 1, count,]
+        if (current < 4 || current >= count - 2) {
+            return [1, 2, 3, 4, NaN, count - 3, count - 2, count - 1, count]
+        }
+        return [1, NaN, current - 1, current, current + 1, NaN, count - 1, count,]
     }
     return [];
 };

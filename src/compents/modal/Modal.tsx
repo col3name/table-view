@@ -11,7 +11,6 @@ interface ModalProps {
     active: boolean;
     close: () => void;
     children: React.ReactNode;
-
     clearState?(): void;
 }
 
