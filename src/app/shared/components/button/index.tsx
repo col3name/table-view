@@ -17,3 +17,12 @@ export const DeleteButton = styled.button`
         fill: ${(props) => props.disabled ? '#C53030' : '#9B2C2C'};
     }
 `;
+
+export const Button = styled.button<{ $active?: boolean; }>`
+    border: 1px solid #CED5DE;
+    padding: 8px 12px 8px 12px;
+    background-color: ${props => props.$active ? "#F2F5F8" : "white"};
+    gap: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+`;

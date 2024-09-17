@@ -1,5 +1,5 @@
 import './App.css'
-import {HomePage} from "./app/page.tsx";
+import {HomePage} from "./app/page";
 
 function App() {
 

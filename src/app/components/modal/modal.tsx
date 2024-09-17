@@ -1,10 +1,10 @@
 import React, {useCallback} from "react";
 
-import Portal from "../Portal/Portal";
+import Portal from "../portal/Portal";
 import {H2} from "../../shared/components/typography";
+import {CloseIcon} from "../../shared/icons/CloseIcon";
 
 import styled from "styled-components";
-import {CloseIcon} from "../../shared/icons/CloseIcon.tsx";
 
 interface ModalProps {
     title?: string;
@@ -27,7 +27,7 @@ export const Modal: React.FC<ModalProps> = ({
                                                 children,
                                             }) => {
     const onClose = useCallback(() => {
-        clearState && clearState();
+        clearState?.();
         close();
     }, [clearState, close]);
     return (

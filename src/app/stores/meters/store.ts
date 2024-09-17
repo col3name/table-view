@@ -4,6 +4,10 @@ import {Address, AddressModel, ConfirmPopup, Meter, MeterModel} from "./model";
 import {deleteMeter, getAddresses, getArea} from "../../api/meters";
 import {toMap} from "./util";
 
+const getPlaceStart = (page: number, limit: number, index: number) => {
+    return (page - 1) * limit + index  + 1;
+}
+
 const LIMIT = 20;
 export const Store = types
     .model({
@@ -34,11 +38,12 @@ export const Store = types
             const addressMap: Map<string, AddressModel> = toMap(values);
             const meters: MeterModel[] = Array.from(self.meters.values()) || [];
 
-            return meters.map((it: MeterModel) => {
+            return meters.map((it: MeterModel, index: number) => {
                 const areaId: string = it.area.id;
                 return (
                     {
                         ...it,
+                        place: getPlaceStart(self.page, self.limit, index),
                         area: addressMap.has(areaId) ? addressMap.get(areaId) : undefined,
                     }
                 );
