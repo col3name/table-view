@@ -7,12 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "size": "npx vite-bundle-visualizer",
     "preview": "vite preview --port 8080"
   },
   "dependencies": {
     "axios": "1.7.7",
     "classnames": "2.5.1",
-    "framer-motion": "11.5.4",
     "mobx": "6.13.2",
     "mobx-react": "9.1.1",
     "mobx-react-lite": "4.0.7",
@@ -38,6 +38,7 @@
     "sass-embedded": "1.78.0",
     "typescript": "5.5.3",
     "typescript-eslint": "8.0.1",
-    "vite": "5.4.1"
+    "vite": "5.4.1",
+    "vite-bundle-visualizer": "^1.2.1"
   }
 }
