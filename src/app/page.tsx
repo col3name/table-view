@@ -42,7 +42,7 @@ const TableContainer = styled.div`
     gap: 4px;
     max-width: min(90vw, 1300px);
     max-height: min(90vh, 900px);
-    overflow: scroll;
+    overflow: auto;
 `;
 
 
