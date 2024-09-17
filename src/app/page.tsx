@@ -6,13 +6,13 @@ import styled, {css, keyframes} from 'styled-components';
 
 import {XBCIcon} from "@/shared/icons/XBCIcon";
 import {GBCIcon} from "@/shared/icons/GBCIcon";
-import {MeterModel} from "@/stores/meters/MeterStore";
 import {DeleteIcon} from "@/shared/icons/DeleteIcon";
 import {H2} from "../shared/components/typography";
 import {PopupRemoveMeter} from "@/compents/Meter/removePopup";
 
 import {formatDate} from "@/shared/lib/date";
 import {useStore} from "@/stores";
+import {DeleteButton} from "@/shared/components/Button";
 
 const Container = styled.div<{ $hidden?: boolean }>`
     display: ${props => props.$hidden ? 'none' : 'flex'};
@@ -45,25 +45,9 @@ const TableContainer = styled.div`
     overflow: scroll;
 `;
 
-export const DeleteButton = styled.button`
-    opacity: 0;
-    border-radius: 8px;
-    padding: 10px 12px 10px 12px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
 
-    &:hover {
-        background-color: ${(props) => props.disabled ? '#FEE3E3' : '#FED7D7'};
-    }
 
-    &:hover path {
-        fill: ${(props) => props.disabled ? '#C53030' : '#9B2C2C'};
-    }
-`;
-
-const Cell = styled.span<{ $disabled?: boolean, $percent?: number; $last?: number; }>`
+const Cell = styled.span<{ $disabled?: boolean, $percent?: number; $last?: boolean; }>`
     width: ${props => `${props.$percent}%`};
     color: ${props => !props.$disabled ? '#1F2939' : '#5E6674'};
 
@@ -159,7 +143,8 @@ const MeterDeleteButton: React.FC<MeterDeleteButtonProps> = observer(({
         if (isLoading) {
             onDeleteDone();
         }
-    }, [isLoading]);
+    }, [isLoading, onDeleteDone]);
+
     return (
         <DeleteButton disabled={isLoading} className={className} onClick={handleDelete}>
             <DeleteIcon/>
@@ -171,7 +156,7 @@ type MeterIcon = {
     type: string;
 };
 
-export const MeterIcon: React.FC<MeterIcon> = ({
+const MeterIcon: React.FC<MeterIcon> = ({
                                                    type
                                                }) => {
     return (
@@ -203,7 +188,13 @@ const animateFade = () => {
     return css`${anim} 1s linear forwards 1`
 };
 
-const MeterRow = observer(({headerSizes, meter}: { meter: any, headerSizes: number[] }) => {
+type MeterProps = {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    meter;
+    headerSizes: number[];
+};
+const MeterRow = observer(({headerSizes, meter}: MeterProps) => {
     const area = meter.area;
     const [isFadingOut, setIsFadingOut] = useState(false);
 
@@ -219,10 +210,10 @@ const MeterRow = observer(({headerSizes, meter}: { meter: any, headerSizes: numb
     }, [meter.installation_date]);
 
     const types = useMemo(() => {
-        return meter.types.map((type: string, index: number) => (
+        return meter._type.map((type: string, index: number) => (
             <MeterIcon key={type + ':' + index} type={type}/>
         ));
-    }, [meter.types]);
+    }, [meter._type]);
 
     return (
         <Row $fade={isFadingOut}>
@@ -232,10 +223,10 @@ const MeterRow = observer(({headerSizes, meter}: { meter: any, headerSizes: numb
             <Cell $percent={headerSizes[3]}>{meter.is_automatic ? 'да' : 'нет'}</Cell>
             <Cell $percent={headerSizes[4]}>{meter.initial_values}</Cell>
             <Cell $percent={headerSizes[5]}>
-                {area ? `${area.house.address} ${area.str_number_full}` : '-'}
+                {area?.house ? `${area.house.address} ${area.str_number_full}` : '-'}
             </Cell>
             <Cell $disabled={true} $percent={headerSizes[6]}>{meter.description || '—'}</Cell>
-            <Cell $last $percent={headerSizes[7]}>
+            <Cell $last={true} $percent={headerSizes[7]}>
                 <MeterDeleteButton
                     onDeleteStart={fadeOut}
                     onDeleteDone={() => setTimeout(() => handleRemoveItem(), 300)}
@@ -340,12 +331,7 @@ const TableBody = styled.ul`
 `;
 const headerSizes = [2, 4, 8, 8, 10, 30, 8, 8];
 
-const FadeRow = styled.div`
-    opacity: 0;
-    transition: opacity 500ms;
-`;
-
-const TableHeader = memo(() => {
+const TableHeader = memo(function TableHeader() {
     return (
         <HeaderRow>
             <HeaderCell $percent={headerSizes[0]}>№</HeaderCell>
@@ -359,8 +345,6 @@ const TableHeader = memo(() => {
         </HeaderRow>
     );
 });
-
-const isWeb = typeof window !== 'undefined';
 
 const HomePage = observer(() => {
     const store = useStore();
@@ -385,7 +369,7 @@ const HomePage = observer(() => {
                         {loading ? (
                             <span>Loading...</span>
                         ) : (
-                            meters.map((meter: MeterModel) => {
+                            meters.map(meter => {
                                 return (
                                     <MeterRow key={meter.id} headerSizes={headerSizes} meter={meter}/>
                                 );

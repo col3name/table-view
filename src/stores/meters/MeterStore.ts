@@ -2,12 +2,26 @@
 import {flow, Instance, types} from 'mobx-state-tree';
 import axios from 'axios';
 
-const Area = types.model({
-    id: types.string,
+// const Area = types.model({
+//     id: types.string,
+//
+// });
+
+export const House = types.model({
+    id: types.identifier,
+    address: types.string,
+});
+
+export const Address = types.model({
+    id: types.identifier,
+    number: types.optional(types.number, 0),
+    str_number: types.optional(types.string, ''),
+    str_number_full: types.optional(types.string, ''),
+    house: types.maybeNull(House),
 });
 
 const Meter = types.model({
-    area: Area,
+    area: Address,
     brand_name: types.maybeNull(types.string),
     place: types.optional(types.number, 0),
     communication: types.string,
@@ -21,18 +35,6 @@ const Meter = types.model({
     _type: types.array(types.string),
 });
 
-export const House = types.model({
-    id: types.identifier,
-    address: types.string,
-});
-
-export const Address = types.model({
-    id: types.identifier,
-    number: types.number,
-    str_number: types.string,
-    str_number_full: types.string,
-    house: House,
-});
 
 const ConfirmPopup = types.model({
     opened: types.boolean,
@@ -41,7 +43,6 @@ const ConfirmPopup = types.model({
 
 export type AddressModel = Instance<typeof Address>
 export type MeterModel = Instance<typeof Meter>
-
 const toMap = (values: Array<AddressModel>) => {
     return values.reduce((acc: Map<string, AddressModel>, it) => {
         if (!acc.has(it.id)) {
@@ -65,6 +66,8 @@ const getAddresses = async ({
         if (response.status > 400) {
             return undefined;
         }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const data = response.data;
         return data;
     } catch (error) {
@@ -79,7 +82,7 @@ export const MeterStore = types
     .model({
         meters: types.array(Meter),
         addresses: types.map(Address),
-        confirmDeletePopup: types.optional( ConfirmPopup, { opened: false, data: null}),
+        confirmDeletePopup: types.optional(ConfirmPopup, {opened: false, data: null}),
         // navigation: types.reference(Navigation),
         count: types.optional(types.number, 0),
         page: 1,
@@ -109,7 +112,6 @@ export const MeterStore = types
                     {
                         ...it,
                         place: it.place,
-                        types: it._type,
                         area: addressMap.has(areaId) ? addressMap.get(areaId) : undefined,
                     }
                 );
@@ -130,6 +132,8 @@ export const MeterStore = types
                 newOffset -= self.limit;
             }
             self.offset = newOffset;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             yield self.fetchMeters(true);
         }),
         fetchMeters: flow(function* (isNext: boolean = false) {
@@ -150,12 +154,15 @@ export const MeterStore = types
                 // const data2 = yield getAddresses({limit: self.limit + LIMIT, offset: newOffset});
                 // console.log(data2.results.map(it => it.description))
                 const data = yield getAddresses({limit: self.limit, offset: newOffset});
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 const results = data.results.map((it, index: number) => ({...it, place: newOffset + index + 1}));
                 if (self.count !== data.count) {
                     self.count = data.count;
                 }
                 self.offset += results.length;
-
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 yield self.fetchAddresses(results);
                 self.meters.clear();
                 self.meters.push(...results);
@@ -175,8 +182,12 @@ export const MeterStore = types
             if (newUniqueIds.length === 0) {
                 return;
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             const areaFetchPromises = newUniqueIds.map((id: string) => self.fetchAddr(id))
             const addressResponse = yield Promise.allSettled(areaFetchPromises);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             const list = addressResponse.map(it => it.value);
             list.forEach((addr: AddressModel) => {
                 if (!self.addresses.has(addr.id)) {
@@ -215,8 +226,13 @@ export const MeterStore = types
                 if (!newAddress) {
                     return false;
                 }
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 yield self.fetchAddresses([newAddress]);
-                self.meters = self.meters.filter((meter) => meter.id !== meterId);
+
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                self.meters = self.meters.filter((meter: MeterModel) => meter.id !== meterId) || [];
                 self.meters.push(newAddress);
                 return true;
             } catch (error) {
@@ -232,10 +248,14 @@ export const MeterStore = types
             if (!meterId) {
                 return;
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             const ok = yield self.deleteMeter(meterId);
             if (!ok) {
                 console.log('failed');
             }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             self.closeRemoveConfirmPopup();
         }),
         closeRemoveConfirmPopup: () => {
