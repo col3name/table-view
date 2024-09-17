@@ -4,12 +4,12 @@ import {
     Table,
     TableBottomActions,
     TableContainer
-} from "../../../shared/components/table/ui";
+} from "../../../shared/ui/table/ui";
 import {MeterTableNavigation} from "./meterTableNavigation";
 import {MeterRow} from "./meterRow";
-import {TableBody} from "../../../shared/components/table/tableBody";
-import {TableHeader} from "../../../shared/components/table/tableHeader";
-import {HeaderItem} from "../../../shared/components/table/table.types";
+import {TableBody} from "../../../shared/ui/table/tableBody";
+import {TableHeader} from "../../../shared/ui/table/tableHeader";
+import {HeaderItem} from "../../../shared/ui/table/table.types";
 
 import {useStore} from "../../../stores";
 

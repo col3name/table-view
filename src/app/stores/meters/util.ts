@@ -1,4 +1,4 @@
-import {AddressModel} from "./model.ts";
+import {AddressModel} from "./model";
 
 export const toMap = (values: Array<AddressModel>) => {
     return values.reduce((acc: Map<string, AddressModel>, it) => {

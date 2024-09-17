@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from "react";
 import {observer} from "mobx-react";
 import styled from "styled-components";
 
-import {Cell, Row} from "../../../shared/components/table/ui";
+import {Cell, Row} from "../../../shared/ui/table/ui";
 import {XBCIcon} from "../../../shared/icons/XBCIcon";
 import {GBCIcon} from "../../../shared/icons/GBCIcon";
 import {MeterDeleteButton} from "./meterDeleteButton";

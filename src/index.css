@@ -1,4 +1,24 @@
 :root {
+  --container-width: 1300px;
+  --layer-drawer: 1000;
+  --layer-sidebar: 1100;
+  --layer-notifications: 1300;
+  --layer-dialogs: 1400;
+  --layer-popovers: 1500;
+  --layer-tooltips: 1600;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xlg: 24px;
+
+  --color-error-300: #ed5e4b;
+  --color-secondary-200: #8d92ae;
+  --color-success-300: #58ba79;
+  --color-common-white: #fff;
+
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

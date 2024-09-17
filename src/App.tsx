@@ -1,6 +1,6 @@
 import './App.css'
 
-import {Container} from "./app/shared/components/container";
+import {Container} from "./app/shared/ui/container";
 import {MetersResult} from "./app/widgets/metersResult";
 
 const App = () => {

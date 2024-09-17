@@ -1,7 +1,7 @@
 import {useCallback} from "react";
 import {observer} from "mobx-react";
 
-import {TableNavigation} from "../../../shared/components/table/tableNavigation";
+import {TableNavigation} from "../../../shared/ui/table/tableNavigation";
 
 import {useStore} from "../../../stores";
 

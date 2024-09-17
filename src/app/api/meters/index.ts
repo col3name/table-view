@@ -1,5 +1,6 @@
 import axios from "axios";
-import {BASE_URL} from "../constant.ts";
+
+import {BASE_URL} from "../constant";
 
 type GetAddressOption = { limit: number, offset: number };
 

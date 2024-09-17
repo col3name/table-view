@@ -2,7 +2,7 @@
 import {useLayoutEffect} from 'react';
 import {observer} from 'mobx-react';
 
-import {H2} from "../../shared/components/typography";
+import {H2} from "../../shared/ui/typography";
 import {MeterTable} from "../../components/meter/table";
 import {PopupRemoveMeter} from "../../components/meter/removePopup";
 

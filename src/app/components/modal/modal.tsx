@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 
-import Portal from "../portal/Portal";
-import {H2} from "../../shared/components/typography";
+import {Portal} from "../portal/Portal";
+import {H2} from "../../shared/ui/typography";
 import {CloseIcon} from "../../shared/icons/CloseIcon";
 
 import styled from "styled-components";
@@ -31,7 +31,7 @@ export const Modal: React.FC<ModalProps> = ({
         close();
     }, [clearState, close]);
     return (
-        <Portal>
+        <Portal id='root-modal'>
             <ModalContainer
                 $active={active}
                 onClick={onClose}

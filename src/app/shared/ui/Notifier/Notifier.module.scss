@@ -1,0 +1,15 @@
+.portal {
+    position: fixed;
+    z-index: var(--layer-notifications);
+    top: 0;
+    right: 0;
+    left: 0;
+
+    margin: spacing(2);
+}
+
+.notifier {
+    width: spacing(88);
+    max-width: 300px;
+    margin: 0 auto;
+}

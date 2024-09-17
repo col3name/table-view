@@ -1,0 +1,12 @@
+.notifications {
+    margin: 0 0 0 auto;
+    padding: 0;
+
+    list-style: none;
+}
+
+.item {
+    & + & {
+        margin-top: spacing(2);
+    }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import {FetchNextPageLoader, TableBodyContainer} from "./ui.tsx";
+import {FetchNextPageLoader, TableBodyContainer} from "./ui";
 
 type TableBodyProps = {
     isFetchingNextPage: boolean,

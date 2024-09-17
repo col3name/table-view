@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect} from "react";
 import {observer} from "mobx-react";
 
-import {DeleteButton} from "../../../shared/components/button";
+import {DeleteButton} from "../../../shared/ui/button";
 
 import {useStore} from "../../../stores";
-import {DeleteIcon} from "../../../shared/icons/DeleteIcon.tsx";
+import {DeleteIcon} from "../../../shared/icons/DeleteIcon";
 
 type MeterDeleteButtonProps = {
     className?: string;

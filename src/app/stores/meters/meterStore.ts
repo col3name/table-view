@@ -9,7 +9,7 @@ const getPlaceStart = (page: number, limit: number, index: number) => {
 }
 
 const LIMIT = 20;
-export const Store = types
+export const MeterStore = types
     .model({
         meters: types.array(Meter),
         addresses: types.map(Address),
