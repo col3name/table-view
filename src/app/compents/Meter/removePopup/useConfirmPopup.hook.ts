@@ -1,6 +1,6 @@
 import {useCallback} from "react";
+import {useStore} from "../../../stores";
 
-import {useStore} from "@/stores";
 
 export const useConfirmPopup = () => {
     const store = useStore().meterStore;

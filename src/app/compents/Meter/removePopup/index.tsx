@@ -1,18 +1,18 @@
 import React from "react";
 import {observer} from "mobx-react";
 
-import {Modal, ModalRow} from "@/compents/modal/Modal";
-
-import {useConfirmPopup} from "@/compents/Meter/removePopup/useConfirmPopup.hook";
-import {useHandleModalKeyboard} from "@/compents/modal/useHandleModalKeyboard";
-import {useStore} from "@/stores";
 import styled from "styled-components";
+import {useConfirmPopup} from "./useConfirmPopup.hook.ts";
+import {useStore} from "../../../stores";
+import {useHandleModalKeyboard} from "../../modal/useHandleModalKeyboard.tsx";
+import {Modal, ModalRow} from "../../modal/Modal.tsx";
 
 export const PopupRemoveMeter = observer(() => {
     const {opened, close, confirm} = useConfirmPopup();
 
     const meterStore = useStore().meterStore;
     const isLoading = meterStore.deleteLoading;
+
     useHandleModalKeyboard({opened, onConfirm: confirm, onCancel: close});
 
     return (

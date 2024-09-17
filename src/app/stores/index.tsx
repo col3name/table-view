@@ -1,4 +1,3 @@
-'use client';
 import React, {createContext, PropsWithChildren, useContext} from 'react';
 import {MeterStore} from './meters/MeterStore';
 

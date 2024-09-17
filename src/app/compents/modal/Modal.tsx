@@ -1,10 +1,10 @@
 import React, {useCallback} from "react";
 
 import Portal from "../Portal/Portal";
-import {CloseIcon} from "@/shared/icons/CloseIcon";
 import {H2} from "../../shared/components/typography";
 
 import styled from "styled-components";
+import {CloseIcon} from "../../shared/icons/CloseIcon.tsx";
 
 interface ModalProps {
     title?: string;

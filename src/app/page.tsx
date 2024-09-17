@@ -2,17 +2,17 @@
 
 import React, {memo, MouseEvent, useCallback, useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import {observer} from 'mobx-react';
-import styled, {css, keyframes} from 'styled-components';
+import styled, {css, keyframes} from "styled-components";
 
-import {XBCIcon} from "@/shared/icons/XBCIcon";
-import {GBCIcon} from "@/shared/icons/GBCIcon";
-import {DeleteIcon} from "@/shared/icons/DeleteIcon";
-import {H2} from "../shared/components/typography";
-import {PopupRemoveMeter} from "@/compents/Meter/removePopup";
+import {useStore} from "./stores";
+import {DeleteButton} from "./shared/components/Button";
+import {XBCIcon} from "./shared/icons/XBCIcon.tsx";
+import {GBCIcon} from "./shared/icons/GBCIcon.tsx";
+import {DeleteIcon} from "./shared/icons/DeleteIcon.tsx";
+import {formatDate} from "./shared/lib/date.ts";
+import {H2} from "./shared/components/typography";
+import {PopupRemoveMeter} from "./compents/Meter/removePopup";
 
-import {formatDate} from "@/shared/lib/date";
-import {useStore} from "@/stores";
-import {DeleteButton} from "@/shared/components/Button";
 
 const Container = styled.div<{ $hidden?: boolean }>`
     display: ${props => props.$hidden ? 'none' : 'flex'};
@@ -44,7 +44,6 @@ const TableContainer = styled.div`
     max-height: min(90vh, 900px);
     overflow: scroll;
 `;
-
 
 
 const Cell = styled.span<{ $disabled?: boolean, $percent?: number; $last?: boolean; }>`
@@ -122,8 +121,8 @@ const MeterDeleteButton: React.FC<MeterDeleteButtonProps> = observer(({
     const isLoading: boolean = meterId === store.meterStore.deleteMeterId && store.meterStore.deleteLoading;
 
     useEffect(() => {
-        if (store.meterStore.confirmDeletePopup.opened) {
-        }
+        // if (store.meterStore.confirmDeletePopup.opened) {
+        // }
         if (isLoading) {
             onDeleteStart();
         }
@@ -182,7 +181,7 @@ const animateFade = () => {
         }
         100% {
             opacity: 0;
-            height: 0,
+            height: 0;
         }
     `
     return css`${anim} 1s linear forwards 1`
@@ -346,7 +345,7 @@ const TableHeader = memo(function TableHeader() {
     );
 });
 
-const HomePage = observer(() => {
+export const HomePage = observer(() => {
     const store = useStore();
 
     useLayoutEffect(() => {
@@ -393,11 +392,3 @@ const TableBottomActions = styled.div`
     justify-content: flex-end;
     max-width: min(90vw, 1300px);
 `;
-
-export default function Home() {
-    return (
-        <div>
-            <HomePage/>
-        </div>
-    );
-}

@@ -1,11 +1,5 @@
-"use client";
 import {flow, Instance, types} from 'mobx-state-tree';
 import axios from 'axios';
-
-// const Area = types.model({
-//     id: types.string,
-//
-// });
 
 export const House = types.model({
     id: types.identifier,
