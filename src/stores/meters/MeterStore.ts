@@ -60,6 +60,7 @@ const getAddresses = async ({
         const response = await axios.get(
             `http://showroom.eis24.me/api/v4/test/meters/`,
             {
+                withCredentials: true,
                 params: {limit: limit, offset},
             }
         );
@@ -199,7 +200,12 @@ export const MeterStore = types
         fetchAddr: flow(function* (areaId: string) {
             const response = yield axios.get(
                 'http://showroom.eis24.me/api/v4/test/areas/',
-                {params: {id__in: areaId}}
+                {
+                    params: {
+                        id__in: areaId
+                    },
+                    withCredentials: true,
+                }
             );
             const results = response.data.results;
             return results.at(0);
