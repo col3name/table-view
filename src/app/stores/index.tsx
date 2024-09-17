@@ -1,8 +1,8 @@
 import React, {createContext, PropsWithChildren, useContext} from 'react';
-import {MeterStore} from './meters/MeterStore';
+import {Store} from './meters/store.ts';
 
 const store = {
-    meterStore: MeterStore.create({meters: [], addresses: {}}),
+    meterStore: Store.create({meters: [], addresses: {}}),
 };
 
 const StoreContext = createContext(store);

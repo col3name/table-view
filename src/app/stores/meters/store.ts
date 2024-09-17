@@ -1,77 +1,11 @@
-import {flow, Instance, types} from 'mobx-state-tree';
-import axios from 'axios';
+import {flow, types} from 'mobx-state-tree';
 
-export const House = types.model({
-    id: types.identifier,
-    address: types.string,
-});
-
-export const Address = types.model({
-    id: types.identifier,
-    number: types.optional(types.number, 0),
-    str_number: types.optional(types.string, ''),
-    str_number_full: types.optional(types.string, ''),
-    house: types.maybeNull(House),
-});
-
-const Meter = types.model({
-    area: Address,
-    brand_name: types.maybeNull(types.string),
-    communication: types.string,
-    description: types.string,
-    id: types.string,
-    initial_values: types.array(types.number),
-    installation_date: types.string,
-    is_automatic: types.maybeNull(types.boolean),
-    model_name: types.maybeNull(types.string),
-    serial_number: types.maybe(types.string),
-    _type: types.array(types.string),
-});
-
-const ConfirmPopup = types.model({
-    opened: types.boolean,
-    data: types.maybeNull(types.string),
-});
-
-export type AddressModel = Instance<typeof Address>
-export type MeterModel = Instance<typeof Meter>
-
-const toMap = (values: Array<AddressModel>) => {
-    return values.reduce((acc: Map<string, AddressModel>, it) => {
-        if (!acc.has(it.id)) {
-            acc.set(it.id, it);
-        }
-        return acc;
-    }, new Map<string, AddressModel>);
-};
-
-const getAddresses = async ({
-                                limit = 1,
-                                offset,
-                            }: { limit: number, offset: number }) => {
-    try {
-        const response = await axios.get(
-            `http://showroom.eis24.me/api/v4/test/meters/`,
-            {
-                withCredentials: true,
-                params: {limit: limit, offset},
-            }
-        );
-        if (response.status > 400) {
-            return undefined;
-        }
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const data = response.data;
-        return data;
-    } catch (error) {
-        console.error({error});
-        return undefined;
-    }
-};
+import {Address, AddressModel, ConfirmPopup, Meter, MeterModel} from "./model";
+import {deleteMeter, getAddresses, getArea} from "../../api/meters";
+import {toMap} from "./util";
 
 const LIMIT = 20;
-export const MeterStore = types
+export const Store = types
     .model({
         meters: types.array(Meter),
         addresses: types.map(Address),
@@ -187,17 +121,7 @@ export const MeterStore = types
             });
         }),
         fetchAddr: flow(function* (areaId: string) {
-            const response = yield axios.get(
-                'http://showroom.eis24.me/api/v4/test/areas/',
-                {
-                    params: {
-                        id__in: areaId
-                    },
-                    withCredentials: true,
-                }
-            );
-            const results = response.data.results;
-            return results.at(0);
+            return yield getArea(areaId);
         }),
         deleteMeter: flow(function* (meterId: string) {
             if (self.deleteLoading) {
@@ -206,9 +130,10 @@ export const MeterStore = types
             self.deleteLoading = true;
             try {
                 self.deleteMeterId = meterId;
-                yield axios.delete(
-                    `http://showroom.eis24.me/api/v4/test/meters/${meterId}/`
-                );
+                const ok = yield deleteMeter(meterId);
+                if (!ok) {
+                    return false;
+                }
                 const meterIndex = self.meters.findIndex((meter: MeterModel) => meterId === meter.id);
 
                 if (!meterIndex) {
