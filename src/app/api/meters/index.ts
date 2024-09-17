@@ -11,7 +11,6 @@ export const getAddresses = async ({
         const response = await axios.get(
             `${BASE_URL}/api/v4/test/meters/`,
             {
-                withCredentials: true,
                 params: {limit: limit, offset},
             }
         );
