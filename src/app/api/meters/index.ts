@@ -3,7 +3,6 @@ import {BASE_URL} from "../constant.ts";
 
 type GetAddressOption = { limit: number, offset: number };
 
-
 export const getAddresses = async ({
                                        limit = 1,
                                        offset,
