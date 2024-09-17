@@ -85,7 +85,7 @@ const SlideAnimationComponent = <Tag extends keyof React.ReactHTML>({
         }),
         [direction, exitDirection, exitDuration, withFading, value, inPercents],
     );
-    const Component = useMemo(() => motion(component || 'div'), [component]);
+    const Component = useMemo(() => motion.create(component || 'div'), [component]);
     const variants = {
         initial,
         enter,
@@ -93,6 +93,8 @@ const SlideAnimationComponent = <Tag extends keyof React.ReactHTML>({
     };
 
     return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         <Component
             key={id}
             {...restProps}

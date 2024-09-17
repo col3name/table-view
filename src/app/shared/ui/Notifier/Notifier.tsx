@@ -24,7 +24,7 @@ export const Notifier: React.FC<NotifierProps> =
             <Notifications className={ styles.notifier }>
                 { notifications.map(({ id, message, kind, closable }) => (
                     <Notification
-                        key={ id }
+                        key={ id + ':' + message }
                         kind={ kind }
                         closable={ closable }
                         onClose={ () => onClose(id) }

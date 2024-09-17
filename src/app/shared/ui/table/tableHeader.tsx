@@ -15,7 +15,7 @@ export const TableHeader: React.FC<TableHeaderProps> = memo(function TableHeader
     return (
         <HeaderRow>
             {headers.map((header: HeaderItem) =>(
-                <HeaderCell $percent={header.percent}>{header.label}</HeaderCell>
+                <HeaderCell key={header.label + '' + header.percent} $percent={header.percent}>{header.label}</HeaderCell>
             ))}
         </HeaderRow>
     );

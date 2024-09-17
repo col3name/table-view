@@ -7,7 +7,6 @@ import {randomID} from "../../shared/lib/common";
 
 const MAX_VISIBLE_NOTIFICATIONS = 3;
 
-
 const NotifyKind = types.frozen(NotificationKind);
 const MNotification = types.model({
     id: types.string,
@@ -59,14 +58,20 @@ export const NotificationStore = types
             const fullNotification = {timeout: 4000, ...notification, id: randomID()};
 
             if (self.notifications.length === MAX_VISIBLE_NOTIFICATIONS) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 self.remove(self.notifications[0].id);
             }
-
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             self.notifications.push(fullNotification);
 
             if (fullNotification.timeout > 0) {
-                setTimeout(() => {
-                    this.remove(fullNotification.id);
+               let id =  setTimeout(() => {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    self.remove(fullNotification.id);
+                    clearTimeout(id);
                 }, fullNotification.timeout);
             }
         },
@@ -74,12 +79,16 @@ export const NotificationStore = types
             message: string,
             options?: Partial<Omit<Notification, 'id' | 'message'>>,
         ) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             return self.push({kind: NotificationKind.success, message, ...(options || {})});
         },
         pushError: (
             message: string,
             options?: Partial<Omit<Notification, 'id' | 'message'>>,
         ) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             return self.push({kind: NotificationKind.error, message, ...(options || {})});
         },
         remove: (id: NotificationId) => {

@@ -61,9 +61,11 @@ const FadeAnimationComponent = <Tag extends keyof React.ReactHTML = 'div'>({
         enter,
         exit,
     };
-    const Component = useMemo(() => motion(component || 'div'), [component]);
+    const Component = useMemo(() => motion.create(component || 'div'), [component]);
 
     return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         <Component
             key={id}
             {...restProps}
