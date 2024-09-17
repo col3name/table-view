@@ -1,6 +1,6 @@
 import {useCallback} from "react";
-import {useStore} from "../../../stores";
 
+import {useStore} from "../../../stores";
 
 export const useConfirmPopup = () => {
     const store = useStore().meterStore;
@@ -16,8 +16,11 @@ export const useConfirmPopup = () => {
             return;
         }
 
-        await store.confirmTheRemoveFromCart()
-        close();
+        const result = await store.confirmTheRemoveFromCart()
+
+        if (result.isOk) {
+            close();
+        }
     }, [close, store])
 
     return {

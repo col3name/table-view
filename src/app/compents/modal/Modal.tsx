@@ -68,13 +68,13 @@ const ModalContent = styled.div`
     gap: 10px;
     flex-direction: column;
     width: 344px;
-    height: 168px;
     padding: 20px;
     background: white;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     box-sizing: border-box;
 `;
+
 const ModalContainer = styled.div<{ $active?: boolean }>`
     position: fixed;
     top: 0;

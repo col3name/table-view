@@ -247,17 +247,26 @@ export const MeterStore = types
         confirmTheRemoveFromCart: flow(function* () {
             const meterId = self.confirmDeletePopup.data;
             if (!meterId) {
-                return;
+                return {
+                    isOk: false,
+                    message: 'Метка не существует',
+                };
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             const ok = yield self.deleteMeter(meterId);
             if (!ok) {
-                console.log('failed');
+                return {
+                    isOk: false,
+                    message: 'Не удалось удалить счетчик'
+                }
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             self.closeRemoveConfirmPopup();
+            return {
+                isOk: true,
+            }
         }),
         closeRemoveConfirmPopup: () => {
             if (!self.confirmDeletePopup.opened) {

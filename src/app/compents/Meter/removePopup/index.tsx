@@ -17,7 +17,7 @@ export const PopupRemoveMeter = observer(() => {
     return (
         <Modal active={opened} close={close} title={"Удаление билета"}>
             <p>Вы уверены, что хотите удалить запись?</p>
-            {isLoading && <span>Loading</span>}
+            {isLoading ? <span>Loading</span>: <span>-</span>}
             <ModalRow>
                 <Button $primary={true} onClick={confirm}>Да</Button>
                 <Button onClick={close}>
