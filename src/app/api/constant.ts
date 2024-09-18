@@ -1,1 +1,1 @@
-export const BASE_URL = `http://showroom.eis24.me`;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;

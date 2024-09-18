@@ -1,4 +1,5 @@
-## Install deps
+## Устанлвить в .env VITE_BASE_URL= с доменов http://showroom.eis24.me
+## Установить зависимости
 ```bash
 pnpm install
 ```
@@ -17,7 +18,7 @@ pnpm build
 
 данные не натсрленного сервера для обработка options запросов cors
 ## Проблемы:
- - падает api meters c отрительным offset: -20 ```http://showroom.eis24.me/api/v4/test/meters/?limit=20&offset=-20```
+ - падает api meters c отрительным offset: -20 ```/api/v4/test/meters/?limit=20&offset=-20```
 ### Реализовано:
 
 1. **Список счётчиков:**
