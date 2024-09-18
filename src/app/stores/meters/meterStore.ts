@@ -20,6 +20,7 @@ type CancelToken = {
   cancelSource: CancelTokenSource;
   cancelTokens: Map<string, CancelTokenSource>;
 };
+
 export const MeterStore = types
   .model({
     meters: types.array(Meter),
@@ -112,9 +113,13 @@ export const MeterStore = types
           self.count = data.count;
         }
         self.offset += results.length;
+
+        const areas: Set<string> = new Set(
+            results.map((meter: MeterModel) => meter.area.id),
+        );
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        yield self.fetchAddresses(results);
+        yield self.fetchAddresses(areas);
         self.meters.clear();
         self.meters.push(...results);
       } catch (error) {
@@ -134,26 +139,24 @@ export const MeterStore = types
         }
       }
     }),
-    fetchAddresses: flow(function* (results: Array<MeterModel>) {
-      const areas: Set<string> = new Set(
-        results.map((meter: MeterModel) => meter.area.id),
-      );
+    fetchAddresses: flow(function* (areas: Set<string>) {
       const newUniqueIds: string[] = Array.from(areas).filter(
         (id: string) => !self.addresses.has(id),
       );
       if (newUniqueIds.length === 0) {
         return;
       }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+
       const areaFetchPromises = newUniqueIds.map((id: string) =>
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         self.fetchAddr(id),
       );
       const addressResponse = yield Promise.allSettled(areaFetchPromises);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const list = addressResponse.map((it) => it.value);
-      list.forEach((addr: AddressModel) => {
+      addressResponse.forEach((it) => {
+        const addr = it.value;
         if (!self.addresses.has(addr.id)) {
           self.addresses.set(addr.id, addr);
         }
@@ -212,9 +215,10 @@ export const MeterStore = types
         if (!newAddress) {
           return false;
         }
+        // debugger;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        yield self.fetchAddresses([newAddress]);
+        yield self.fetchAddresses(new Set([newAddress.area.id]));
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -245,6 +249,7 @@ export const MeterStore = types
           message: "Метка не существует",
         };
       }
+      console.log({meterId});
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const ok = yield self.deleteMeter(meterId);
