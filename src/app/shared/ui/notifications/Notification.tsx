@@ -5,6 +5,7 @@ import React from 'react';
 // import { Icon24Close as CloseIcon } from '@ui/Icon';
 
 import styles from './notification.module.css';
+
 import {
   INotificationProps,
   NotificationKind,

@@ -3,17 +3,17 @@ import { createRoot } from 'react-dom/client';
 
 import './index.css';
 
-import App from './App';
+import { App } from './App';
 
-import { StoreProvider } from './app/stores';
-import { NotificationsProvider } from './app/services/notifications';
+let rootElement = document.getElementById('root');
+if (!rootElement) {
+  rootElement = document.createElement('div');
+  rootElement.id = 'root';
+  document.body.appendChild(rootElement);
+}
 
-createRoot(document.getElementById('root')!).render(
+createRoot(rootElement).render(
   <StrictMode>
-    <StoreProvider>
-      <NotificationsProvider>
-        <App />
-      </NotificationsProvider>
-    </StoreProvider>
+    <App />
   </StrictMode>
 );

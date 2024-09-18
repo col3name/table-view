@@ -29,9 +29,12 @@ const headerSizes = headers.map((it: HeaderItem) => it.percent);
 export const MeterTable = observer(() => {
   const store = useStore();
 
+  // const meters = [];
   const meters = store.meterStore.meterList;
+  const isOutsidePage = store.meterStore.isOutsidePage;
   const loading = store.meterStore.meterLoading;
   const isFetchingNextPage = store.meterStore.isFetchingNextPage;
+
 
   return (
     <>
@@ -39,7 +42,8 @@ export const MeterTable = observer(() => {
         <Table>
           <TableHeader headers={headers} />
 
-          <TableBody isFetchingNextPage={isFetchingNextPage} loading={loading}>
+          <TableBody isFetchingNextPage={loading} loading={isFetchingNextPage}>
+            {isOutsidePage && (<span>Page outside range</span>)}
             {meters.map((meter) => {
               return (
                 <MeterRow

@@ -17,7 +17,7 @@ export const Meter = types.model({
   area: Address,
   brand_name: types.maybeNull(types.string),
   communication: types.string,
-  description: types.string,
+  description: types.maybeNull(types.string),
   id: types.string,
   initial_values: types.array(types.number),
   installation_date: types.string,

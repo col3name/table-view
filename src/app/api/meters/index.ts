@@ -1,6 +1,7 @@
-import axios, { CancelToken } from 'axios';
+import axios, { CanceledError, CancelToken } from 'axios';
 
 import { BASE_URL } from '../constant';
+import { ErrorLevel, logError } from '../../shared/lib/logger.ts';
 
 type GetAddressOption = {
   limit: number;
@@ -25,7 +26,16 @@ export const getAddresses = async ({
     // @ts-ignore
     return response.data;
   } catch (error) {
-    console.error({ error });
+    if (error instanceof CanceledError) {
+      if (error.name === 'AbortError') {
+        throw error;
+      }
+    }
+    if (error instanceof Error) {
+      logError({ level: ErrorLevel.WARN }, error);
+    } else {
+      console.error(error);
+    }
     return undefined;
   }
 };
@@ -43,7 +53,19 @@ export const getArea = async (areaId: string) => {
     }
     return results.at(0);
   } catch (error) {
-    console.error(error);
+    if (error instanceof CanceledError) {
+      if (error.name === 'AbortError') {
+        throw error;
+      }
+    }
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        throw error;
+      }
+      logError({ level: ErrorLevel.WARN }, error);
+    } else {
+      console.error(error);
+    }
     return undefined;
   }
 };
@@ -61,7 +83,19 @@ export const deleteMeter = async (
     );
     return response.status === 204;
   } catch (error) {
-    console.error({ error });
+    if (error instanceof CanceledError) {
+      if (error.name === 'AbortError') {
+        throw error;
+      }
+    }
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        throw error;
+      }
+      logError({ level: ErrorLevel.WARN }, error);
+    } else {
+      console.error(error);
+    }
     return false;
   }
 };

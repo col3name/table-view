@@ -1,14 +1,21 @@
+import React from 'react';
+
+import { StoreProvider } from './app/stores';
+import { NotificationsProvider } from './app/services/notifications';
+import { ErrorBoundary } from './app/shared/ui/errorBoundary';
+
 import './App.css';
 
-import { Container } from './app/shared/ui/container';
-import { MetersResult } from './app/widgets/metersResult';
+import { AppRouter } from './Routes';
 
-const App = () => {
+export const App: React.FC = () => {
   return (
-    <Container>
-      <MetersResult />
-    </Container>
+    <StoreProvider>
+      <NotificationsProvider>
+        <ErrorBoundary>
+          <AppRouter />
+        </ErrorBoundary>
+      </NotificationsProvider>
+    </StoreProvider>
   );
 };
-
-export default App;

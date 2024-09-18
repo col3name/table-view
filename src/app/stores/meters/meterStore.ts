@@ -1,4 +1,4 @@
-import { flow, types } from 'mobx-state-tree';
+import {flow, IModelType, Instance, types} from 'mobx-state-tree';
 
 import {
   Address,
@@ -9,7 +9,7 @@ import {
 } from './model';
 import { deleteMeter, getAddresses, getArea } from '../../api/meters';
 import { toMap } from './util';
-import axios, { CancelTokenSource } from 'axios';
+import axios, { CanceledError, CancelTokenSource } from 'axios';
 
 const getPlaceStart = (page: number, limit: number, index: number) => {
   return (page - 1) * limit + index + 1;
@@ -45,6 +45,12 @@ export const MeterStore = types
     })
   )
   .views((self) => ({
+    get isOutsidePage(): boolean {
+      if (self.count === 0) {
+        return false;
+      }
+      return Math.ceil(self.count / self.limit) < self.page;
+    },
     get currentPage() {
       return self.page;
     },
@@ -85,10 +91,10 @@ export const MeterStore = types
       yield self.fetchMeters(true);
     }),
     fetchMeters: flow(function* (isNext: boolean = false) {
+      if (self.isFetchingNextPage) {
+        return;
+      }
       if (isNext) {
-        if (self.isFetchingNextPage) {
-          return;
-        }
         self.isFetchingNextPage = true;
       } else {
         if (self.loading) {
@@ -108,7 +114,11 @@ export const MeterStore = types
         });
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const results = data.results;
+        const results = data?.results;
+        if (!results) {
+          self.isFetchingNextPage = false;
+          return;
+        }
         if (self.count !== data.count) {
           self.count = data.count;
         }
@@ -123,7 +133,7 @@ export const MeterStore = types
         self.meters.clear();
         self.meters.push(...results);
       } catch (error) {
-        if (axios.isCancel(error)) {
+        if (axios.isCancel(error) || error instanceof CanceledError) {
           console.log(
             `Request getMeters limit:${self.limit}, offset: ${self.offset} canceled:`,
             error.message
@@ -173,7 +183,7 @@ export const MeterStore = types
 
         return yield getArea(areaId);
       } catch (error) {
-        if (axios.isCancel(error)) {
+        if (axios.isCancel(error) || error instanceof CanceledError) {
           console.log(`Fetch area ${areaId} canceled:`, error.message);
           if (self.cancelTokens.has(cancelTokenId)) {
             self.cancelTokens.get(cancelTokenId)?.cancel();
@@ -209,7 +219,10 @@ export const MeterStore = types
           cancelToken: self.cancelSource.token,
         });
 
-        const newAddresses = data.results;
+        const newAddresses = data?.results;
+        if (!newAddresses) {
+          return;
+        }
         const newAddress = newAddresses.at(0);
 
         if (!newAddress) {
@@ -227,7 +240,7 @@ export const MeterStore = types
         self.meters.push(newAddress);
         return true;
       } catch (error) {
-        if (axios.isCancel(error)) {
+        if (axios.isCancel(error) || error instanceof CanceledError) {
           console.log(
             `Request delete meter ${meterId} canceled:`,
             error.message

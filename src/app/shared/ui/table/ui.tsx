@@ -44,6 +44,7 @@ export const animateFade = () => {
 
 export const TableBodyContainer = styled.ul`
   position: relative;
+  min-height: 200px;
 `;
 
 export const Table = styled.div`

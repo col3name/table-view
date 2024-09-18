@@ -16,7 +16,8 @@ pnpm build
 ## preview
 
 данные не натсрленного сервера для обработка options запросов cors
-
+## Проблемы:
+ - падает api meters c отрительным offset: -20 ```http://showroom.eis24.me/api/v4/test/meters/?limit=20&offset=-20```
 ### Реализовано:
 
 1. **Список счётчиков:**

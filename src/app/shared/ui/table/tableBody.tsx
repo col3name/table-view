@@ -15,7 +15,7 @@ export const TableBody: React.FC<TableBodyProps> = ({
   return (
     <TableBodyContainer>
       {isFetchingNextPage && <FetchNextPageLoader />}
-      {loading ? <span>Loading...</span> : children}
+      {loading ? <span style={{position: 'absolute', top: '50%', left: '50%'}}>Loading...</span> : children}
     </TableBodyContainer>
   );
 };

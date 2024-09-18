@@ -1,0 +1,42 @@
+.ErrorScreen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  padding-top: 334px;
+  padding-left: 80px;
+
+  color: gray;
+
+  &-Title {
+    margin-bottom: 20px;
+
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 98px;
+  }
+
+  &-Description {
+    margin-bottom: 80px;
+
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 58px;
+    white-space: pre-wrap;
+  }
+
+  &-Button {
+    display: inline-block;
+
+    padding: 12px 32px;
+
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 56px;
+
+    border-radius: 80px;
+    background: #6839cf;
+  }
+}
