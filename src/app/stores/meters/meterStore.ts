@@ -1,4 +1,4 @@
-import {flow, types} from 'mobx-state-tree';
+import { flow, types } from 'mobx-state-tree';
 
 import {
   Address,

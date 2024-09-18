@@ -35,7 +35,6 @@ export const MeterTable = observer(() => {
   const loading = store.meterStore.meterLoading;
   const isFetchingNextPage = store.meterStore.isFetchingNextPage;
 
-
   return (
     <>
       <TableContainer>
@@ -43,7 +42,7 @@ export const MeterTable = observer(() => {
           <TableHeader headers={headers} />
 
           <TableBody isFetchingNextPage={loading} loading={isFetchingNextPage}>
-            {isOutsidePage && (<span>Page outside range</span>)}
+            {isOutsidePage && <span>Page outside range</span>}
             {meters.map((meter) => {
               return (
                 <MeterRow
