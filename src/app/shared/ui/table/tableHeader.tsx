@@ -11,7 +11,7 @@ type TableHeaderProps = {
 
 export const TableHeader: React.FC<TableHeaderProps> = memo(function TableHeader({
                                                                                      headers
-                                                                                 }) {
+                                                                                 }: TableHeaderProps) {
     return (
         <HeaderRow>
             {headers.map((header: HeaderItem) =>(

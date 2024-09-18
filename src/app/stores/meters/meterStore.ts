@@ -31,7 +31,7 @@ export const MeterStore = types
     })
     .volatile((): CancelToken => ({
         cancelSource: axios.CancelToken.source(),
-        cancelTokens: new Map<string, any>(),
+        cancelTokens: new Map<string, CancelTokenSource>(),
     }))
     .views((self) => ({
         get currentPage() {

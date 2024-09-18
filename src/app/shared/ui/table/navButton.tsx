@@ -8,11 +8,11 @@ type NavButtonProps = {
     setPage: (page: number) => void;
 };
 
-export const NavButton: React.FC<NavButtonProps> = React.memo(({
+export const NavButton: React.FC<NavButtonProps> = React.memo(function NavButton({
                                                                    page,
                                                                    active,
                                                                    setPage,
-                                                               }: NavButtonProps) => {
+                                                               }: NavButtonProps) {
     const onClick = useCallback( (page: number) => async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         event.stopPropagation();
