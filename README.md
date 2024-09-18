@@ -1,4 +1,11 @@
+## Зависимости [https://github.com/nvm-sh/nvm](nvm) и node v20.13.1
+
 ## Устанлвить в .env VITE_BASE_URL= с доменов http://showroom.eis24.me
+## Установить  node v20.13.1
+```bash
+nvm install
+```
+
 ## Установить зависимости
 ```bash
 pnpm install
