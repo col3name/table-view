@@ -1,4 +1,4 @@
-const template = (variables, { tpl }) => {
+const getSvgIconTemplate = (variables, { tpl }) => {
   const ComponentName = variables.componentName.substring(3) + 'Icon';
   return tpl`
 import React, { SVGProps,  Ref, forwardRef } from "react";
@@ -19,4 +19,4 @@ export const ${ComponentName}: React.FC<Props> = forwardRef(function ${Component
 `;
 };
 
-module.exports = template;
+module.exports = getSvgIconTemplate;
