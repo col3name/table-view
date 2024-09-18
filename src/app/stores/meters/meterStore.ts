@@ -1,3 +1,4 @@
+import axios, { CanceledError, CancelTokenSource } from 'axios';
 import { flow, types } from 'mobx-state-tree';
 
 import {
@@ -9,7 +10,6 @@ import {
 } from './model';
 import { deleteMeter, getAddresses, getArea } from '../../api/meters';
 import { toMap } from './util';
-import axios, { CanceledError, CancelTokenSource } from 'axios';
 
 const getPlaceStart = (page: number, limit: number, index: number) => {
   return (page - 1) * limit + index + 1;

@@ -29,7 +29,6 @@ const headerSizes = headers.map((it: HeaderItem) => it.percent);
 export const MeterTable = observer(() => {
   const store = useStore();
 
-  // const meters = [];
   const meters = store.meterStore.meterList;
   const isOutsidePage = store.meterStore.isOutsidePage;
   const loading = store.meterStore.meterLoading;
