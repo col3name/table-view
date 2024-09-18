@@ -1,15 +1,14 @@
-import './App.css'
+import "./App.css";
 
-import {Container} from "./app/shared/ui/container";
-import {MetersResult} from "./app/widgets/metersResult";
+import { Container } from "./app/shared/ui/container";
+import { MetersResult } from "./app/widgets/metersResult";
 
 const App = () => {
-
   return (
     <Container>
-      <MetersResult/>
+      <MetersResult />
     </Container>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,27 +1,27 @@
 .notification {
-    z-index: var(--layer-notifications);
+  z-index: var(--layer-notifications);
 
-    display: flex;
+  display: flex;
 
-    border-radius: var(--radius-md);
+  border-radius: var(--radius-md);
 }
 
 .kindError {
-    background: var(--color-error-300);
+  background: var(--color-error-300);
 }
 
 .kindInfo {
-    background: var(--color-secondary-200);
+  background: var(--color-secondary-200);
 }
 
 .kindSuccess {
-    background: var(--color-success-300);
+  background: var(--color-success-300);
 }
 
 .content {
-    flex-grow: 1;
+  flex-grow: 1;
 
-    padding: 4px 8px;
+  padding: 4px 8px;
 
-    color: var(--color-common-white);
+  color: var(--color-common-white);
 }

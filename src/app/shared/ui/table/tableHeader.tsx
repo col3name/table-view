@@ -1,22 +1,26 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
 
-import {HeaderCell, HeaderRow} from "./ui";
+import { HeaderCell, HeaderRow } from "./ui";
 
-import {HeaderItem} from "./table.types";
-
+import { HeaderItem } from "./table.types";
 
 type TableHeaderProps = {
-    headers: HeaderItem[];
+  headers: HeaderItem[];
 };
 
-export const TableHeader: React.FC<TableHeaderProps> = memo(function TableHeader({
-                                                                                     headers
-                                                                                 }: TableHeaderProps) {
+export const TableHeader: React.FC<TableHeaderProps> = memo(
+  function TableHeader({ headers }: TableHeaderProps) {
     return (
-        <HeaderRow>
-            {headers.map((header: HeaderItem) =>(
-                <HeaderCell key={header.label + '' + header.percent} $percent={header.percent}>{header.label}</HeaderCell>
-            ))}
-        </HeaderRow>
+      <HeaderRow>
+        {headers.map((header: HeaderItem) => (
+          <HeaderCell
+            key={header.label + "" + header.percent}
+            $percent={header.percent}
+          >
+            {header.label}
+          </HeaderCell>
+        ))}
+      </HeaderRow>
     );
-});
+  },
+);
