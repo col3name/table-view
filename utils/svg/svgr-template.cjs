@@ -3,8 +3,6 @@ const getSvgIconTemplate = (variables, { tpl }) => {
   return tpl`
 import React, { SVGProps,  Ref, forwardRef } from "react";
 
-// import classnames from 'classnames';
-
 import { IconPropsType } from "./icons.types";
 
 ${variables.interfaces};
@@ -12,9 +10,7 @@ ${variables.interfaces};
 type Props = IconPropsType & SVGProps<SVGSVGElement>;
 
 export const ${ComponentName}: React.FC<Props> = forwardRef(function ${ComponentName}( props: Props, ref: Ref<SVGSVGElement>) {
-    return (
-        ${variables.jsx}
-    );
+    return (${variables.jsx});
 });
 `;
 };

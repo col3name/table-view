@@ -2,9 +2,9 @@ import React, { useCallback, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { DeleteButton } from '../../../shared/ui/button';
+import { TrashIcon } from '../../../shared/icons/Trash';
 
 import { useStore } from '../../../stores';
-import { DeleteIcon } from '../../../shared/icons/DeleteIcon';
 
 type MeterDeleteButtonProps = {
   className?: string;
@@ -45,7 +45,7 @@ export const MeterDeleteButton: React.FC<MeterDeleteButtonProps> = observer(
         className={className}
         onClick={handleDelete}
       >
-        <DeleteIcon />
+        <TrashIcon />
       </DeleteButton>
     );
   }

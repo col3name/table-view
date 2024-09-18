@@ -1,4 +1,4 @@
-import React, { SVGProps, Ref, forwardRef } from 'react'; // import classnames from 'classnames';
+import React, { SVGProps, Ref, forwardRef } from 'react';
 import { IconPropsType } from './icons.types';
 type Props = IconPropsType & SVGProps<SVGSVGElement>;
 export const HvsIcon: React.FC<Props> = forwardRef(function HvsIcon(

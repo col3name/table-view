@@ -1,7 +1,7 @@
 import React, { SVGProps, Ref, forwardRef } from 'react';
 import { IconPropsType } from './icons.types';
 type Props = IconPropsType & SVGProps<SVGSVGElement>;
-export const GvsIcon: React.FC<Props> = forwardRef(function GvsIcon(
+export const TrashIcon: React.FC<Props> = forwardRef(function TrashIcon(
   props: Props,
   ref: Ref<SVGSVGElement>
 ) {
@@ -14,9 +14,12 @@ export const GvsIcon: React.FC<Props> = forwardRef(function GvsIcon(
       ref={ref}
       {...props}
     >
+      <path fill="#9DA6B4" d="M7.333 6v6H6V6zM10 6v6H8.667V6z" />
       <path
-        fill="#F46B4D"
-        d="M8.892 1.42c.002-.023.008-.053.008-.079C8.9 1.153 8.76 1 8.589 1c-.073 0-.125.03-.144.039C7.388 1.49 3.3 5.957 3.3 9.878 3.3 12.707 5.39 15 7.967 15c2.834 0 4.666-2.62 4.666-5.122 0-4.161-4.468-4.93-3.74-8.458"
+        fill="#9DA6B4"
+        fillRule="evenodd"
+        d="M4.853.667h6.294l.667 2h2.853V4h-1.334l-.666 11.333H3.333L2.667 4H1.333V2.667h2.853zm.739 2h4.816L10.186 2H5.814zM4 4l.667 10h6.666L12 4z"
+        clipRule="evenodd"
       />
     </svg>
   );
