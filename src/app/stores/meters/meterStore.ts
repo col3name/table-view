@@ -201,7 +201,7 @@ export const MeterStore = types
         self.cancelSource = axios.CancelToken.source();
         self.deleteMeterId = meterId;
         const meterIndex = self.meters.findIndex(
-            (meter: MeterModel) => meterId === meter.id
+          (meter: MeterModel) => meterId === meter.id
         );
         if (meterIndex === -1) {
           return false;
@@ -214,7 +214,12 @@ export const MeterStore = types
         self.count--;
 
         if (self.countPage === self.page) {
-          self.meters.replace(self.meters.filter((meter: MeterModel) => meter.id !== meterId) || []);
+          self.isFetchingNextPage = false;
+          self.loading = false;
+          self.meters.replace(
+            self.meters.filter((meter: MeterModel) => meter.id !== meterId) ||
+              []
+          );
           return true;
         }
         self.cancelSource.cancel();
@@ -238,7 +243,9 @@ export const MeterStore = types
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         yield self.fetchAddresses(new Set([newAddress.area.id]));
-        self.meters.replace(self.meters.filter((meter: MeterModel) => meter.id !== meterId) || []);
+        self.meters.replace(
+          self.meters.filter((meter: MeterModel) => meter.id !== meterId) || []
+        );
         self.meters.push(newAddress);
         return true;
       } catch (error) {
