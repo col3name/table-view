@@ -40,7 +40,7 @@ export const MeterTable = observer(() => {
         <Table>
           <TableHeader headers={headers} />
 
-          <TableBody isFetchingNextPage={loading} loading={isFetchingNextPage}>
+          <TableBody isFetchingNextPage={isFetchingNextPage} loading={loading}>
             {isOutsidePage && <span>Page outside range</span>}
             {meters.map((meter) => {
               return (
