@@ -8,6 +8,7 @@
   "svgo": true,
   "svgoConfig": "./utils/svgo/svgo.json",
   "ref": true,
+  "index": false,
   "prettierConfig": {
     "trailingComma": "es5",
     "tabWidth": 2,

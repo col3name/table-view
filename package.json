@@ -11,7 +11,7 @@
     "preview": "vite preview --port 8080",
     "format": "prettier --ignore-path .eslintignore --write .",
     "format:check": "prettier --ignore-path .eslintignore --check .",
-    "gen:icons": "svgr --template utils/svg/svgr-template.cjs --config-file ./svgr.config.json --out-dir src/app/shared/icons ./public/icons"
+    "gen:icons": "svgr --template utils/svg/svgr-template.cjs --config-file utils/svg/svgr.config.json --out-dir src/app/shared/icons ./public/icons && git add  src/app/shared/icons public/icons"
   },
   "dependencies": {
     "axios": "1.7.7",
