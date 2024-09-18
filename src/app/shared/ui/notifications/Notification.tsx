@@ -10,7 +10,7 @@ import {
   NotificationKind,
 } from '../../typings/notifications';
 import { Button } from '../button';
-import { CloseIcon } from '../../icons/CloseIcon';
+import { CloseIcon } from '../../icons/Close';
 
 const getNotificationClassName = ({
   kind,

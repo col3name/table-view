@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Portal } from '../portal/Portal';
 import { H2 } from '../../shared/ui/typography';
-import { CloseIcon } from '../../shared/icons/CloseIcon';
+import { CloseIcon } from '../../shared/icons/Close';
 
 import styled from 'styled-components';
 
