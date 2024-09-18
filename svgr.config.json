@@ -8,5 +8,11 @@
   "svgo": true,
   "svgoConfig": "./utils/svgo/svgo.json",
   "ref": true,
-  "prettierConfig":
+  "prettierConfig": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 80
+  }
 }
