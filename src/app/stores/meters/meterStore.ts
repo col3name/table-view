@@ -200,16 +200,23 @@ export const MeterStore = types
         self.cancelSource.cancel();
         self.cancelSource = axios.CancelToken.source();
         self.deleteMeterId = meterId;
+        const meterIndex = self.meters.findIndex(
+            (meter: MeterModel) => meterId === meter.id
+        );
+        if (meterIndex === -1) {
+          return false;
+        }
+
         const ok = yield deleteMeter(meterId, self.cancelSource.token);
         if (!ok) {
           return false;
         }
-        const meterIndex = self.meters.findIndex(
-          (meter: MeterModel) => meterId === meter.id
-        );
+        self.count--;
 
-        if (!meterIndex) {
-          return false;
+        if (self.countPage === self.page) {
+          self.meters =
+              self.meters.filter((meter: MeterModel) => meter.id !== meterId) || [];
+          return true;
         }
         self.cancelSource.cancel();
         self.cancelSource = axios.CancelToken.source();
@@ -221,7 +228,7 @@ export const MeterStore = types
 
         const newAddresses = data?.results;
         if (!newAddresses) {
-          return;
+          return false;
         }
         const newAddress = newAddresses.at(0);
 
