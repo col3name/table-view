@@ -115,7 +115,7 @@ export const MeterStore = types
         self.offset += results.length;
 
         const areas: Set<string> = new Set(
-            results.map((meter: MeterModel) => meter.area.id),
+          results.map((meter: MeterModel) => meter.area.id),
         );
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -249,7 +249,6 @@ export const MeterStore = types
           message: "Метка не существует",
         };
       }
-      console.log({meterId});
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const ok = yield self.deleteMeter(meterId);

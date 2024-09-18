@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     minify: "esbuild",
     rollupOptions: {
-      treeshake: 'recommended',
+      treeshake: "recommended",
       plugins: [visualizer(), terser()],
     },
   },
