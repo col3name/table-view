@@ -1,27 +1,27 @@
-import { observer } from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
 
 import {
   Table,
   TableBottomActions,
   TableContainer,
-} from "../../../shared/ui/table/ui";
-import { MeterTableNavigation } from "./meterTableNavigation";
-import { MeterRow } from "./meterRow";
-import { TableBody } from "../../../shared/ui/table/tableBody";
-import { TableHeader } from "../../../shared/ui/table/tableHeader";
-import { HeaderItem } from "../../../shared/ui/table/table.types";
+} from '../../../shared/ui/table/ui';
+import { MeterTableNavigation } from './meterTableNavigation';
+import { MeterRow } from './meterRow';
+import { TableBody } from '../../../shared/ui/table/tableBody';
+import { TableHeader } from '../../../shared/ui/table/tableHeader';
+import { HeaderItem } from '../../../shared/ui/table/table.types';
 
-import { useStore } from "../../../stores";
+import { useStore } from '../../../stores';
 
 const headers: HeaderItem[] = [
-  { percent: 2, label: "№" },
-  { percent: 4, label: "Тип" },
-  { percent: 8, label: "Дата установки" },
-  { percent: 8, label: "Автоматический" },
-  { percent: 10, label: "Текущине показания" },
-  { percent: 30, label: "Адрес" },
-  { percent: 8, label: "Примечание" },
-  { percent: 8, label: "" },
+  { percent: 2, label: '№' },
+  { percent: 4, label: 'Тип' },
+  { percent: 8, label: 'Дата установки' },
+  { percent: 8, label: 'Автоматический' },
+  { percent: 10, label: 'Текущине показания' },
+  { percent: 30, label: 'Адрес' },
+  { percent: 8, label: 'Примечание' },
+  { percent: 8, label: '' },
 ];
 
 const headerSizes = headers.map((it: HeaderItem) => it.percent);

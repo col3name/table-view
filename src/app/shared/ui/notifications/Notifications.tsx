@@ -1,11 +1,11 @@
-import React from "react";
-import { Children, isValidElement } from "react";
-import cn from "classnames";
+import React from 'react';
+import { Children, isValidElement } from 'react';
+import cn from 'classnames';
 // import {AnimatePresence} from "framer-motion";
 
-import styles from "./Notifications.module.scss";
+import styles from './Notifications.module.scss';
 
-import { INotificationProps } from "../../typings/notifications";
+import { INotificationProps } from '../../typings/notifications';
 
 // import {SlideAnimation} from "../animation/slideAnimation";
 

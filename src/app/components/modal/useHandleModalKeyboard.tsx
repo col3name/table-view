@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 interface PopupKeyboardProps {
   opened: boolean;
@@ -18,21 +18,21 @@ export const useHandleModalKeyboard = ({
 
     const handleKeyboard = (e: KeyboardEvent) => {
       switch (e.key) {
-        case "Escape": {
+        case 'Escape': {
           onCancel?.();
           break;
         }
-        case "Enter": {
+        case 'Enter': {
           onConfirm?.();
           break;
         }
       }
     };
 
-    window.addEventListener("keydown", handleKeyboard);
+    window.addEventListener('keydown', handleKeyboard);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyboard);
+      window.removeEventListener('keydown', handleKeyboard);
     };
   }, [opened, onCancel, onConfirm]);
 };

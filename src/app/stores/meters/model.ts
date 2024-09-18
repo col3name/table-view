@@ -1,4 +1,4 @@
-import { Instance, types } from "mobx-state-tree";
+import { Instance, types } from 'mobx-state-tree';
 
 export const House = types.model({
   id: types.identifier,
@@ -8,8 +8,8 @@ export const House = types.model({
 export const Address = types.model({
   id: types.identifier,
   number: types.optional(types.number, 0),
-  str_number: types.optional(types.string, ""),
-  str_number_full: types.optional(types.string, ""),
+  str_number: types.optional(types.string, ''),
+  str_number_full: types.optional(types.string, ''),
   house: types.maybeNull(House),
 });
 

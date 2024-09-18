@@ -1,12 +1,12 @@
-import { observer } from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
 
-import { Modal, ModalRow } from "../../modal/modal";
+import { Modal, ModalRow } from '../../modal/modal';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { useStore } from "../../../stores";
-import { useConfirmPopup } from "./useConfirmPopup.hook";
-import { useHandleModalKeyboard } from "../../modal/useHandleModalKeyboard";
+import { useStore } from '../../../stores';
+import { useConfirmPopup } from './useConfirmPopup.hook';
+import { useHandleModalKeyboard } from '../../modal/useHandleModalKeyboard';
 
 export const PopupRemoveMeter = observer(() => {
   const { opened, close, confirm } = useConfirmPopup();
@@ -17,7 +17,7 @@ export const PopupRemoveMeter = observer(() => {
   useHandleModalKeyboard({ opened, onConfirm: confirm, onCancel: close });
 
   return (
-    <Modal active={opened} close={close} title={"Удаление билета"}>
+    <Modal active={opened} close={close} title={'Удаление билета'}>
       <p>Вы уверены, что хотите удалить запись?</p>
       {isLoading ? <span>Loading</span> : <span>-</span>}
       <ModalRow>
@@ -32,10 +32,10 @@ export const PopupRemoveMeter = observer(() => {
 
 const Button = styled.button<{ $primary?: boolean }>`
   background-color: ${({ $primary }) =>
-    $primary ? "hsla(40, 72%, 50%, 1)" : "hsla(347, 49%, 46%, 1)"};
+    $primary ? 'hsla(40, 72%, 50%, 1)' : 'hsla(347, 49%, 46%, 1)'};
   border: 1px solid
     ${({ $primary }) =>
-      $primary ? "hsla(40, 72%, 60%, 1)" : "hsla(0, 0%, 0%, 0.4)"};
+      $primary ? 'hsla(40, 72%, 60%, 1)' : 'hsla(0, 0%, 0%, 0.4)'};
   white-space: nowrap;
   color: hsla(150, 14%, 97%, 1);
   cursor: pointer;
@@ -56,12 +56,12 @@ const Button = styled.button<{ $primary?: boolean }>`
 
   &:hover {
     background-color: ${({ $primary }) =>
-      $primary ? "hsla(40, 72%, 60%, 1)" : "hsla(347, 49%, 51%, 1)"};
+      $primary ? 'hsla(40, 72%, 60%, 1)' : 'hsla(347, 49%, 51%, 1)'};
     ${({ $primary }) => $primary && `transform: translateY(-3px)`}
   }
 
   &:active {
     background-color: ${({ $primary }) =>
-      $primary ? "hsla(40, 72%, 35%, 1)" : "hsla(347, 49%, 26%, 1)"};
+      $primary ? 'hsla(40, 72%, 35%, 1)' : 'hsla(347, 49%, 26%, 1)'};
   }
 `;

@@ -10,7 +10,8 @@
     "size": "npx vite-bundle-visualizer",
     "preview": "vite preview --port 8080",
     "format": "prettier --ignore-path .eslintignore --write .",
-    "format:check": "prettier --ignore-path .eslintignore --check ."
+    "format:check": "prettier --ignore-path .eslintignore --check .",
+    "gen:icons": "svgr --template utils/svgo/svgr-template.cjs --config-file ./svgr.config.json --out-dir src/app/shared/icons ./public/icons"
   },
   "dependencies": {
     "axios": "1.7.7",
@@ -28,6 +29,7 @@
     "@commitlint/config-conventional": "19.5.0",
     "@eslint/js": "9.9.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@svgr/cli": "^8.1.0",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@vitejs/plugin-react": "4.3.1",

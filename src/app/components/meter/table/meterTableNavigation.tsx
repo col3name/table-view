@@ -1,9 +1,9 @@
-import { useCallback } from "react";
-import { observer } from "mobx-react-lite";
+import { useCallback } from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { TableNavigation } from "../../../shared/ui/table/tableNavigation";
+import { TableNavigation } from '../../../shared/ui/table/tableNavigation';
 
-import { useStore } from "../../../stores";
+import { useStore } from '../../../stores';
 
 export const MeterTableNavigation = observer(() => {
   const store = useStore();
@@ -19,7 +19,7 @@ export const MeterTableNavigation = observer(() => {
       }
       await store.meterStore.setPage(page);
     },
-    [store.meterStore, isFetchingNextPage],
+    [store.meterStore, isFetchingNextPage]
   );
 
   return <TableNavigation current={current} count={count} setPage={setPage} />;

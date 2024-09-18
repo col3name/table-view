@@ -1,13 +1,13 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { observer } from "mobx-react-lite";
-import styled from "styled-components";
+import React, { useCallback, useMemo, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import styled from 'styled-components';
 
-import { Cell, Row } from "../../../shared/ui/table/ui";
-import { XBCIcon } from "../../../shared/icons/XBCIcon";
-import { GBCIcon } from "../../../shared/icons/GBCIcon";
-import { MeterDeleteButton } from "./meterDeleteButton";
+import { Cell, Row } from '../../../shared/ui/table/ui';
+import { MeterDeleteButton } from './meterDeleteButton';
 
-import { formatDate } from "../../../shared/lib/date";
+import { formatDate } from '../../../shared/lib/date';
+import { HvsIcon } from '../../../shared/icons/Hvs.tsx';
+import { GvsIcon } from '../../../shared/icons/Gvs.tsx';
 
 type MeterIcon = {
   type: string;
@@ -16,15 +16,15 @@ type MeterIcon = {
 const MeterIcon: React.FC<MeterIcon> = ({ type }) => {
   return (
     <MeterIconContainer>
-      {type === "ColdWaterAreaMeter" && (
+      {type === 'ColdWaterAreaMeter' && (
         <>
-          <XBCIcon />
+          <HvsIcon />
           <span>ХВС</span>
         </>
       )}
-      {type === "HotWaterAreaMeter" && (
+      {type === 'HotWaterAreaMeter' && (
         <>
-          <GBCIcon />
+          <GvsIcon />
           <span>ГВС</span>
         </>
       )}
@@ -79,7 +79,7 @@ export const MeterRow = observer(
 
     const types = useMemo(() => {
       return meter._type.map((type: string, index: number) => (
-        <MeterIcon key={type + ":" + index} type={type} />
+        <MeterIcon key={type + ':' + index} type={type} />
       ));
     }, [meter._type]);
 
@@ -89,14 +89,14 @@ export const MeterRow = observer(
         <Cell $percent={headerSizes[1]}>{types}</Cell>
         <Cell $percent={headerSizes[2]}>{installationDate}</Cell>
         <Cell $percent={headerSizes[3]}>
-          {meter.is_automatic ? "да" : "нет"}
+          {meter.is_automatic ? 'да' : 'нет'}
         </Cell>
         <Cell $percent={headerSizes[4]}>{meter.initial_values}</Cell>
         <Cell $percent={headerSizes[5]}>
-          {area?.house ? `${area.house.address} ${area.str_number_full}` : "-"}
+          {area?.house ? `${area.house.address} ${area.str_number_full}` : '-'}
         </Cell>
         <Cell $disabled={true} $percent={headerSizes[6]}>
-          {meter.description || "—"}
+          {meter.description || '—'}
         </Cell>
         <Cell $last={true} $percent={headerSizes[7]}>
           <MeterDeleteButton
@@ -108,5 +108,5 @@ export const MeterRow = observer(
         </Cell>
       </Row>
     );
-  },
+  }
 );

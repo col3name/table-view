@@ -1,16 +1,16 @@
-import cn from "classnames";
-import React from "react";
+import cn from 'classnames';
+import React from 'react';
 
 // import { Button } from '@ui/Button';
 // import { Icon24Close as CloseIcon } from '@ui/Icon';
 
-import styles from "./notification.module.css";
+import styles from './notification.module.css';
 import {
   INotificationProps,
   NotificationKind,
-} from "../../typings/notifications";
-import { Button } from "../button";
-import { CloseIcon } from "../../icons/CloseIcon";
+} from '../../typings/notifications';
+import { Button } from '../button';
+import { CloseIcon } from '../../icons/CloseIcon';
 
 const getNotificationClassName = ({
   kind,
@@ -25,7 +25,7 @@ const getNotificationClassName = ({
       [styles.kindWarning]: kind === NotificationKind.warning,
     },
     className,
-    "notification-toast",
+    'notification-toast'
   );
 
 export const Notification: React.FC<INotificationProps> = ({

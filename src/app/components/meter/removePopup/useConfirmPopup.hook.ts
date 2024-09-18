@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { useStore } from "../../../stores";
-import { useNotifications } from "../../../services/notifications";
+import { useStore } from '../../../stores';
+import { useNotifications } from '../../../services/notifications';
 
 export const useConfirmPopup = () => {
   const store = useStore().meterStore;
@@ -21,10 +21,10 @@ export const useConfirmPopup = () => {
     const result = await store.confirmTheRemoveFromCart();
 
     if (!result.isOk) {
-      pushError("Не удалось удалить");
+      pushError('Не удалось удалить');
       return;
     }
-    pushSuccess("Успешно удалено");
+    pushSuccess('Успешно удалено');
     close();
   }, [close, pushError, pushSuccess, store]);
 

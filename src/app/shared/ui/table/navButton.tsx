@@ -1,6 +1,6 @@
-import React, { MouseEvent, useCallback } from "react";
+import React, { MouseEvent, useCallback } from 'react';
 
-import { Button } from "../button";
+import { Button } from '../button';
 
 type NavButtonProps = {
   page: number;
@@ -16,7 +16,7 @@ export const NavButton: React.FC<NavButtonProps> = React.memo(
         event.stopPropagation();
         setPage(page);
       },
-      [setPage],
+      [setPage]
     );
 
     if (Number.isNaN(page)) {
@@ -32,5 +32,5 @@ export const NavButton: React.FC<NavButtonProps> = React.memo(
         {page}
       </Button>
     );
-  },
+  }
 );

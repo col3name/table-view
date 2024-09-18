@@ -1,0 +1,12 @@
+{
+  "icon": false,
+  "typescript": true,
+  "expandProps": "end",
+  "replaceAttrValues": {
+    "#000": "currentColor"
+  },
+  "svgo": true,
+  "svgoConfig": "./utils/svgo/svgo.json",
+  "ref": true,
+  "prettierConfig":
+}

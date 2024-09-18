@@ -1,4 +1,4 @@
-import { flow, types } from "mobx-state-tree";
+import { flow, types } from 'mobx-state-tree';
 
 import {
   Address,
@@ -6,10 +6,10 @@ import {
   ConfirmPopup,
   Meter,
   MeterModel,
-} from "./model";
-import { deleteMeter, getAddresses, getArea } from "../../api/meters";
-import { toMap } from "./util";
-import axios, { CancelTokenSource } from "axios";
+} from './model';
+import { deleteMeter, getAddresses, getArea } from '../../api/meters';
+import { toMap } from './util';
+import axios, { CancelTokenSource } from 'axios';
 
 const getPlaceStart = (page: number, limit: number, index: number) => {
   return (page - 1) * limit + index + 1;
@@ -36,13 +36,13 @@ export const MeterStore = types
     loading: false,
     isFetchingNextPage: false,
     deleteLoading: false,
-    deleteMeterId: "",
+    deleteMeterId: '',
   })
   .volatile(
     (): CancelToken => ({
       cancelSource: axios.CancelToken.source(),
       cancelTokens: new Map<string, CancelTokenSource>(),
-    }),
+    })
   )
   .views((self) => ({
     get currentPage() {
@@ -115,7 +115,7 @@ export const MeterStore = types
         self.offset += results.length;
 
         const areas: Set<string> = new Set(
-          results.map((meter: MeterModel) => meter.area.id),
+          results.map((meter: MeterModel) => meter.area.id)
         );
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -126,10 +126,10 @@ export const MeterStore = types
         if (axios.isCancel(error)) {
           console.log(
             `Request getMeters limit:${self.limit}, offset: ${self.offset} canceled:`,
-            error.message,
+            error.message
           );
         } else if (error instanceof Error) {
-          console.error("Failed to fetch meters", error);
+          console.error('Failed to fetch meters', error);
         }
       } finally {
         if (isNext) {
@@ -141,7 +141,7 @@ export const MeterStore = types
     }),
     fetchAddresses: flow(function* (areas: Set<string>) {
       const newUniqueIds: string[] = Array.from(areas).filter(
-        (id: string) => !self.addresses.has(id),
+        (id: string) => !self.addresses.has(id)
       );
       if (newUniqueIds.length === 0) {
         return;
@@ -150,7 +150,7 @@ export const MeterStore = types
       const areaFetchPromises = newUniqueIds.map((id: string) =>
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        self.fetchAddr(id),
+        self.fetchAddr(id)
       );
       const addressResponse = yield Promise.allSettled(areaFetchPromises);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -163,7 +163,7 @@ export const MeterStore = types
       });
     }),
     fetchAddr: flow(function* (areaId: string) {
-      const cancelTokenId = "getArea:" + areaId;
+      const cancelTokenId = 'getArea:' + areaId;
       try {
         if (self.cancelTokens.has(cancelTokenId)) {
           self.cancelTokens.get(cancelTokenId)?.cancel();
@@ -195,7 +195,7 @@ export const MeterStore = types
           return false;
         }
         const meterIndex = self.meters.findIndex(
-          (meter: MeterModel) => meterId === meter.id,
+          (meter: MeterModel) => meterId === meter.id
         );
 
         if (!meterIndex) {
@@ -230,14 +230,14 @@ export const MeterStore = types
         if (axios.isCancel(error)) {
           console.log(
             `Request delete meter ${meterId} canceled:`,
-            error.message,
+            error.message
           );
         } else if (error instanceof Error) {
-          console.error("Failed to delete meter", error);
+          console.error('Failed to delete meter', error);
         }
         return false;
       } finally {
-        self.deleteMeterId = "";
+        self.deleteMeterId = '';
         self.deleteLoading = false;
       }
     }),
@@ -246,7 +246,7 @@ export const MeterStore = types
       if (!meterId) {
         return {
           isOk: false,
-          message: "Метка не существует",
+          message: 'Метка не существует',
         };
       }
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -255,7 +255,7 @@ export const MeterStore = types
       if (!ok) {
         return {
           isOk: false,
-          message: "Не удалось удалить счетчик",
+          message: 'Не удалось удалить счетчик',
         };
       }
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

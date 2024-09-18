@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import { randomID } from "../../shared/lib/common";
+import { randomID } from '../../shared/lib/common';
 
 type PortalPropsType = {
   children: React.ReactNode;
@@ -10,8 +10,8 @@ type PortalPropsType = {
 };
 
 export const Portal: React.FC<PortalPropsType> = ({
-  id = "root-modal",
-  className = "",
+  id = 'root-modal',
+  className = '',
   children,
 }) => {
   const [element, setElement] = useState<HTMLElement | null>(null);
@@ -21,7 +21,7 @@ export const Portal: React.FC<PortalPropsType> = ({
     let created = false;
     if (!target) {
       created = true;
-      target = document.createElement("div");
+      target = document.createElement('div');
       target.id = `portal-${id || randomID()}`;
       target.className = className;
       document.body.appendChild(target);

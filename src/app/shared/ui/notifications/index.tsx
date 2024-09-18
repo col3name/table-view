@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { Notifier } from "../Notifier/Notifier";
+import { Notifier } from '../Notifier/Notifier';
 
-import { NotificationId, Notification } from "../../typings/notifications";
+import { NotificationId, Notification } from '../../typings/notifications';
 
 export type NotificationsProviderProps = React.PropsWithChildren & {
   notifications: Notification[];

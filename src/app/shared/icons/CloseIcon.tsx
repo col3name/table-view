@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { IconPropsType } from "./icons.types";
+import { IconPropsType } from './icons.types';
 
 export const CloseIcon: React.FC<IconPropsType> = ({
   className,
-  fill = "#333333",
+  fill = '#333333',
   onClick,
 }) => {
   return (

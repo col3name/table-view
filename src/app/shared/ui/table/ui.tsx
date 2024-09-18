@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components';
 
 export const TableNavigationContainer = styled.nav`
   display: flex;
@@ -74,11 +74,11 @@ export const Cell = styled.span<{
   $last?: boolean;
 }>`
   width: ${(props) => `${props.$percent}%`};
-  color: ${(props) => (!props.$disabled ? "#1F2939" : "#5E6674")};
+  color: ${(props) => (!props.$disabled ? '#1F2939' : '#5E6674')};
 
   display: flex;
   flex-direction: row;
-  justify-content: ${(props) => (props.$last ? "flex-end" : "flex-start")};
+  justify-content: ${(props) => (props.$last ? 'flex-end' : 'flex-start')};
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
@@ -104,11 +104,11 @@ export const Row = styled.li<{ $disabled?: boolean; $fade?: boolean }>`
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   transition: all 0.2s ease-in-out;
-  animation: ${(props) => (props.$fade ? animateFade() : "none")};
+  animation: ${(props) => (props.$fade ? animateFade() : 'none')};
 
   &:hover {
-    background-color: ${(props) => (props.$disabled ? "#fff" : "#F0F3F7")};
-    cursor: ${(props) => (props.$disabled ? "initial" : "pointer")};
+    background-color: ${(props) => (props.$disabled ? '#fff' : '#F0F3F7')};
+    cursor: ${(props) => (props.$disabled ? 'initial' : 'pointer')};
   }
 
   &:hover .action__delete-btn {

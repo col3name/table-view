@@ -1,6 +1,6 @@
-import { customAlphabet } from "nanoid";
+import { customAlphabet } from 'nanoid';
 
 export const randomID = customAlphabet(
-  "1234567890abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-_+={}][|,./?;:'\"<>",
-  12,
+  '1234567890abcdefghijklmnopqrstuvwxyz~!@#$%^&*()-_+={}][|,./?;:\'"<>',
+  12
 );

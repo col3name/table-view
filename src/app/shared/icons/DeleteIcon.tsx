@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 type DeleteIconProps = {
   fill?: string;
 };
 
-export const DeleteIcon: React.FC<DeleteIconProps> = ({ fill = "#9DA6B4" }) => {
+export const DeleteIcon: React.FC<DeleteIconProps> = ({ fill = '#9DA6B4' }) => {
   return (
     <Svg
       width="16"

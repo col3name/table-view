@@ -1,10 +1,10 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
+import React from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { useStore } from "../../stores";
+import { useStore } from '../../stores';
 
-import { NotificationsProvider as VicugnaNotificationsProvider } from "../../shared/ui/notifications";
-import { Notification } from "../../shared/typings/notifications.ts";
+import { NotificationsProvider as VicugnaNotificationsProvider } from '../../shared/ui/notifications';
+import { Notification } from '../../shared/typings/notifications.ts';
 
 interface NotificationsProviderProps {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ export const NotificationsProvider = observer<NotificationsProviderProps>(
         {children}
       </VicugnaNotificationsProvider>
     );
-  },
+  }
 );
 
 export const useNotifications = () => {

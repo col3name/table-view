@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div<{ $hidden?: boolean }>`
-  display: ${(props) => (props.$hidden ? "none" : "flex")};
+  display: ${(props) => (props.$hidden ? 'none' : 'flex')};
   flex-direction: column;
 
   gap: 4px;

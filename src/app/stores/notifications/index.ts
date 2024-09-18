@@ -1,13 +1,13 @@
-import { Instance, types } from "mobx-state-tree";
+import { Instance, types } from 'mobx-state-tree';
 
 import {
   Notification,
   NotificationId,
   NotificationKind,
-} from "../../shared/typings/notifications";
+} from '../../shared/typings/notifications';
 
-import { SomePartial } from "../../shared/typings/utils";
-import { randomID } from "../../shared/lib/common";
+import { SomePartial } from '../../shared/typings/utils';
+import { randomID } from '../../shared/lib/common';
 
 const MAX_VISIBLE_NOTIFICATIONS = 3;
 
@@ -51,16 +51,16 @@ export const NotificationStore = types
           closable: item.closable,
           timeout: item.timeout,
           kind: toNotificationKind(item.kind),
-        }),
+        })
       );
     },
   }))
   .actions((self) => ({
     push: (
       notification: SomePartial<
-        Omit<Notification, "id">,
-        "timeout" | "closable"
-      >,
+        Omit<Notification, 'id'>,
+        'timeout' | 'closable'
+      >
     ) => {
       const fullNotification = {
         timeout: 4000,
@@ -88,7 +88,7 @@ export const NotificationStore = types
     },
     pushSuccess: (
       message: string,
-      options?: Partial<Omit<Notification, "id" | "message">>,
+      options?: Partial<Omit<Notification, 'id' | 'message'>>
     ) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -100,7 +100,7 @@ export const NotificationStore = types
     },
     pushError: (
       message: string,
-      options?: Partial<Omit<Notification, "id" | "message">>,
+      options?: Partial<Omit<Notification, 'id' | 'message'>>
     ) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -112,7 +112,7 @@ export const NotificationStore = types
     },
     remove: (id: NotificationId) => {
       const index = self.notifications.findIndex(
-        (notification) => notification.id === id,
+        (notification) => notification.id === id
       );
 
       if (index !== -1) {

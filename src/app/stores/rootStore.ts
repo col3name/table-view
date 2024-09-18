@@ -1,7 +1,7 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
-import { MeterStore } from "./meters/meterStore";
-import { NotificationStore } from "./notifications";
+import { MeterStore } from './meters/meterStore';
+import { NotificationStore } from './notifications';
 
 export const store = {
   meterStore: MeterStore.create({ meters: [], addresses: {} }),

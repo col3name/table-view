@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 export type NotificationId = string;
 
 export enum NotificationKind {
-  error = "error",
-  info = "info",
-  success = "success",
-  warning = "warning",
+  error = 'error',
+  info = 'info',
+  success = 'success',
+  warning = 'warning',
 }
 
 export type Notification = {

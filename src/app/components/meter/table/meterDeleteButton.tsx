@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useCallback, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { DeleteButton } from "../../../shared/ui/button";
+import { DeleteButton } from '../../../shared/ui/button';
 
-import { useStore } from "../../../stores";
-import { DeleteIcon } from "../../../shared/icons/DeleteIcon";
+import { useStore } from '../../../stores';
+import { DeleteIcon } from '../../../shared/icons/DeleteIcon';
 
 type MeterDeleteButtonProps = {
   className?: string;
@@ -14,7 +14,7 @@ type MeterDeleteButtonProps = {
 };
 
 export const MeterDeleteButton: React.FC<MeterDeleteButtonProps> = observer(
-  ({ className = "", meterId, onDeleteStart, onDeleteDone }) => {
+  ({ className = '', meterId, onDeleteStart, onDeleteDone }) => {
     const store = useStore();
     const isLoading: boolean =
       meterId === store.meterStore.deleteMeterId &&
@@ -48,5 +48,5 @@ export const MeterDeleteButton: React.FC<MeterDeleteButtonProps> = observer(
         <DeleteIcon />
       </DeleteButton>
     );
-  },
+  }
 );

@@ -1,10 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 
-import { Portal } from "../portal/Portal";
-import { H2 } from "../../shared/ui/typography";
-import { CloseIcon } from "../../shared/icons/CloseIcon";
+import { Portal } from '../portal/Portal';
+import { H2 } from '../../shared/ui/typography';
+import { CloseIcon } from '../../shared/icons/CloseIcon';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface ModalProps {
   title?: string;
@@ -21,7 +21,7 @@ export const ModalRow = styled.div`
 
 export const Modal: React.FC<ModalProps> = ({
   clearState,
-  title = "",
+  title = '',
   active,
   close,
   children,
@@ -82,6 +82,6 @@ const ModalContainer = styled.div<{ $active?: boolean }>`
   padding: 24px;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: ${(props) => (props.$active ? 1 : 0)};
-  pointer-events: ${(props) => (props.$active ? "initial" : "none")};
+  pointer-events: ${(props) => (props.$active ? 'initial' : 'none')};
   z-index: 2;
 `;

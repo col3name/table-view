@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
-import { TableNavigationContainer } from "./ui";
-import { NavButton } from "./navButton";
+import { TableNavigationContainer } from './ui';
+import { NavButton } from './navButton';
 
 const getPages = (count: number, current: number): number[] => {
   if (count > 10) {
@@ -31,7 +31,7 @@ export const TableNavigation: React.FC<TableNavigationProps> = ({
       {pages.map((page: number, index: number) => {
         return (
           <NavButton
-            key={page + ":" + index}
+            key={page + ':' + index}
             setPage={setPage}
             active={page === current}
             page={page}

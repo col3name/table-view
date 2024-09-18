@@ -1,2 +1,2 @@
-export * from "./rootStore";
-export * from "./rootStoreProvider";
+export * from './rootStore';
+export * from './rootStoreProvider';
