@@ -4,7 +4,7 @@ import React from 'react';
 // import { Button } from '@ui/Button';
 // import { Icon24Close as CloseIcon } from '@ui/Icon';
 
-import styles from './Notification.module.css';
+import styles from './notification.module.css';
 import {INotificationProps, NotificationKind} from "../../typings/notifications";
 import {Button} from "../button";
 import {CloseIcon} from "../../icons/CloseIcon";
