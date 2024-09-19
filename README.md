@@ -1,32 +1,37 @@
-## Зависимости [https://github.com/nvm-sh/nvm](nvm) и node v20.13.1
+## Запуск с docker-compose
+```bash
+docker-compose up
+```
 
-## Устанлвить в .env VITE_BASE_URL= с доменов http://showroom.eis24.me
-## Установить  node v20.13.1
+## Запуск без docker-compose
+### Зависимости [https://github.com/nvm-sh/nvm](nvm) и node v20.13.1
+
+### Установить в .env VITE_BASE_URL= с доменов http://showroom.eis24.me
+### Установить  node v20.13.1
 ```bash
 nvm install
 ```
 
-## Установить зависимости
+### Установить зависимости
 ```bash
 pnpm install
 ```
 
-## Develop
+### Develop
 ```bash
 pnpm dev
 ```
 
-## Build
+### Build
 ```bash
 pnpm build
 ```
 
-## preview
-
-данные не натсрленного сервера для обработка options запросов cors
 ## Проблемы:
+ - данные не натсрленного сервера для обработка options запросов cors
  - падает api meters c отрительным offset: -20 ```/api/v4/test/meters/?limit=20&offset=-20```
-### Реализовано:
+
+## Реализовано:
 
 1. **Список счётчиков:**
     - Постраничный вывод списка счётчиков в таблице с серверной пагинацией (по 20 элементов на странице).
