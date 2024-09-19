@@ -2,6 +2,10 @@
 ```bash
 docker-compose up
 ```
+### остановить
+```bash
+docker-compose down
+```
 
 ## Запуск без docker-compose
 ### Зависимости [https://github.com/nvm-sh/nvm](nvm) и node v20.13.1
