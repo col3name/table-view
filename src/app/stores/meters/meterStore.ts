@@ -216,10 +216,7 @@ export const MeterStore = types
         if (self.countPage === self.page) {
           self.isFetchingNextPage = false;
           self.loading = false;
-          self.meters.replace(
-            self.meters.filter((meter: MeterModel) => meter.id !== meterId) ||
-              []
-          );
+          self.meters.splice(meterIndex, 1)
           return true;
         }
         self.cancelSource.cancel();
@@ -243,9 +240,7 @@ export const MeterStore = types
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         yield self.fetchAddresses(new Set([newAddress.area.id]));
-        self.meters.replace(
-          self.meters.filter((meter: MeterModel) => meter.id !== meterId) || []
-        );
+        self.meters.splice(meterIndex, 1);
         self.meters.push(newAddress);
         return true;
       } catch (error) {
